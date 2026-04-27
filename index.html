@@ -37,7 +37,6 @@ p {
     border-radius: 12px;
 }
 
-/* 🎨 Day styling */
 h3 {
     margin: 10px 0;
     color: #ffd1dc;
@@ -126,7 +125,7 @@ function nextStep() {
         card.innerHTML = `
             <h2>One Last Thing ❤️</h2>
             <p>Enter our Love Passcode 🔐</p>
-            <input type="password" id="passcode" maxlength="8" placeholder="Enter 8-digit code">
+            <input type="password" id="passcode" maxlength="8" placeholder="Enter code">
             <br>
             <button class="next" onclick="checkPasscode()">Unlock 💕</button>
             <p id="error" style="color:#ffcccc;"></p>
@@ -136,7 +135,7 @@ function nextStep() {
     else if (step === shayari.length + 1) {
         card.innerHTML = `
             <h2>Our Journey ❤️</h2>
-            <img src="photo.jpg">
+            <img src="./photo.jpg" alt="Our Memory ❤️">
             <button class="next" onclick="nextStep()">Continue 💕</button>
         `;
     }
@@ -153,7 +152,86 @@ function nextStep() {
     }
 }
 
-// Rest of your JS (passcode, hearts, confetti) remains SAME
+// 🔒 Netlify function call (your existing setup)
+async function checkPasscode() {
+    const input = document.getElementById("passcode").value;
+    const error = document.getElementById("error");
+
+    try {
+        const res = await fetch("/.netlify/functions/verify", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ passcode: input })
+        });
+
+        const data = await res.json();
+
+        if (data.success) {
+            nextStep();
+        } else {
+            error.innerText = "💔 Wrong passcode... try again ❤️";
+        }
+    } catch (err) {
+        error.innerText = "⚠️ Server error. Try again later.";
+    }
+}
+
+// Final step
+function setupFinal() {
+    const noBtn = document.getElementById("no");
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - 100);
+        const y = Math.random() * (window.innerHeight - 50);
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    document.getElementById("yes").onclick = () => {
+        const message = encodeURIComponent("I said YES ❤️😍 Forever begins now 💕");
+        window.open(`https://api.whatsapp.com/send?text=${message}`, "_blank");
+
+        document.body.innerHTML = `
+            <h1 style="text-align:center;margin-top:20%;">
+                She said YES ❤️😍<br>Forever Begins Now 💕
+            </h1>
+        `;
+        confetti();
+    };
+}
+
+// Hearts
+setInterval(() => {
+    const h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "❤️";
+    h.style.left = Math.random()*100+"vw";
+    h.style.fontSize = (Math.random()*20+10)+"px";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),6000);
+},400);
+
+// Confetti
+function confetti(){
+    for(let i=0;i<150;i++){
+        let d=document.createElement("div");
+        d.style.position="absolute";
+        d.style.width="6px";
+        d.style.height="6px";
+        d.style.background="white";
+        d.style.left=Math.random()*window.innerWidth+"px";
+        d.style.top="0";
+        d.style.animation="fall 3s linear";
+        document.body.appendChild(d);
+        setTimeout(()=>d.remove(),3000);
+    }
+}
+
+const style=document.createElement("style");
+style.innerHTML=`@keyframes fall{to{transform:translateY(100vh)}}`;
+document.head.appendChild(style);
 
 </script>
 
