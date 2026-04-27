@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: 'Georgia', serif;
-    background: linear-gradient(135deg, #2b2e4a, #e84545);
+    background: linear-gradient(135deg, #8e4450, #c76b73);
     color: white;
     display: flex;
     justify-content: center;
@@ -18,17 +18,35 @@ body {
     overflow: hidden;
 }
 
+/* 🌸 Card */
 .card {
     width: 90%;
     max-width: 420px;
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
+    padding: 30px 25px;
+    border-radius: 24px;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(18px);
     text-align: center;
-    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+    position: relative;
+    z-index: 2;
 }
 
+/* ✨ Headings */
+h2 {
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-size: 18px;
+    background: rgba(255,255,255,0.15);
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+/* 💌 Text */
 p {
     font-size: 18px;
     line-height: 1.6;
@@ -37,59 +55,84 @@ p {
     border-radius: 12px;
 }
 
-h3 {
-    margin: 10px 0;
-    color: #ffd1dc;
+/* 🔐 Input */
+input {
+    width: 80%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 15px;
+    background: rgba(255,255,255,0.9);
 }
 
-.next { background: white; color: #333; padding:10px 18px; border:none; border-radius:8px; }
-
-img {
-    width: 100%;
-    border-radius: 15px;
-    margin-top: 10px;
+/* 💕 Button */
+button {
+    margin-top: 15px;
+    padding: 12px 22px;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #ff4d6d, #ff758f);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
 }
 
-/* 💖 Blur */
-.blur {
-    filter: blur(20px) brightness(0.7);
+button:hover {
     transform: scale(1.05);
-    transition: all 2s ease;
+    box-shadow: 0 5px 20px rgba(255, 77, 109, 0.5);
 }
 
-.clear {
-    filter: blur(0) brightness(1);
-    transform: scale(1);
+/* 💖 Blur reveal */
+.blur {
+    filter: blur(20px);
+    transition: 2s;
 }
+.clear { filter: blur(0); }
 
 /* 💓 Heartbeat */
 .heartbeat {
     animation: beat 1s infinite;
 }
 @keyframes beat {
-    0%,100% { transform: scale(1); }
     50% { transform: scale(1.05); }
 }
 
-/* 🌹 Petals */
+/* 🌹 Falling particles */
 .petal {
     position: absolute;
+    z-index: 1;
     pointer-events: none;
     animation: fall linear infinite;
 }
 
 @keyframes fall {
-    0% {
-        transform: translateY(-10vh) translateX(0);
-        opacity: 1;
-    }
-    50% {
-        transform: translateY(50vh) translateX(20px);
-    }
-    100% {
-        transform: translateY(110vh) translateX(-20px);
-        opacity: 0;
-    }
+    0% { transform: translateY(-10vh) translateX(0); opacity:1; }
+    50% { transform: translateY(50vh) translateX(20px); }
+    100% { transform: translateY(110vh) translateX(-20px); opacity:0; }
+}
+
+/* ✨ Sparkles */
+.sparkle {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.6;
+    animation: sparkle 3s infinite;
+}
+@keyframes sparkle {
+    50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* 💖 Pass box */
+.pass-box {
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 10px;
 }
 </style>
 </head>
@@ -99,7 +142,7 @@ img {
 <div class="card" id="card">
     <h2>Hey Chakli ❤️</h2>
     <p>I want to show you something special...</p>
-    <button class="next" onclick="nextStep()">Start 💌</button>
+    <button onclick="nextStep()">Start 💌</button>
 </div>
 
 <script>
@@ -108,9 +151,9 @@ let step = -1;
 
 const shayari = [
 "You are my today, my tomorrow, and all my New Years to come. I pray that our love lasts a lifetime and beyond. Love you my beautiful wife.",
-"Another year, another chapter of our love story. May this New Year bring us closer, stronger, and more in love than ever. Let’s stay together—today, tomorrow, and forever.",
-"As the clock strikes midnight, I hold onto one wish—that we continue to walk hand in hand through every joy and challenge, living together in love forever.",
-"With you by my side, every year feels beautiful. This New Year, I wish us endless love, shared dreams, and a forever that never fades."
+"Another year, another chapter of our love story. May this New Year bring us closer, stronger, and more in love than ever.",
+"As the clock strikes midnight, I hold onto one wish—that we continue to walk hand in hand forever.",
+"With you by my side, every year feels beautiful."
 ];
 
 function nextStep() {
@@ -119,104 +162,83 @@ function nextStep() {
 
     if (step < shayari.length) {
         card.innerHTML = `
-            <h2>For You Chakli ❤️</h2>
-            <h3>💌 Day ${step + 1} of Love</h3>
-            <p>${shayari[step]}</p>
-            <button class="next" onclick="nextStep()">Next 💌</button>
-        `;
+        <h2>For You ❤️</h2>
+        <h3>💌 Day ${step+1}</h3>
+        <p>${shayari[step]}</p>
+        <button onclick="nextStep()">Next 💌</button>`;
     }
 
     else if (step === shayari.length) {
         card.innerHTML = `
-            <h2>One Last Thing ❤️</h2>
+        <h2>One Last Thing ❤️</h2>
+        <div class="pass-box">
             <p>Enter our Love Passcode 🔐</p>
-            <input type="password" id="passcode">
+            <input id="passcode">
             <br>
-            <button class="next" onclick="checkPasscode()">Unlock 💕</button>
-            <p id="error"></p>
-        `;
+            <button onclick="checkPasscode()">Unlock 💕</button>
+            <p id="error" style="color:#ffd1dc;"></p>
+        </div>`;
     }
 
-    else if (step === shayari.length + 1) {
+    else if (step === shayari.length+1) {
         card.innerHTML = `
-            <h2>Our Journey ❤️</h2>
-            <img id="loveImage" src="./photo.jpg" class="blur">
-            <p id="revealText"></p>
-        `;
-
-        setTimeout(revealImage, 1500);
+        <h2>Our Journey ❤️</h2>
+        <img id="img" src="./photo.jpg" class="blur" style="width:100%;border-radius:15px;">
+        <p id="text"></p>`;
+        setTimeout(reveal,1500);
     }
 }
 
-// 🔐 Netlify
-async function checkPasscode() {
-    const input = document.getElementById("passcode").value;
-    const error = document.getElementById("error");
-
-    try {
-        const res = await fetch("/.netlify/functions/verify", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ passcode: input })
-        });
-
-        const data = await res.json();
-
-        if (data.success) nextStep();
-        else error.innerText = "Wrong passcode ❤️";
-    } catch {
-        error.innerText = "Error";
-    }
+async function checkPasscode(){
+    const res = await fetch("/.netlify/functions/verify",{method:"POST"});
+    const data = await res.json();
+    if(data.success) nextStep();
+    else document.getElementById("error").innerText="Wrong passcode ❤️";
 }
 
-// ✍️ Typing effect + 💓 heartbeat
-function revealImage() {
-    const img = document.getElementById("loveImage");
-    img.classList.remove("blur");
-    img.classList.add("clear", "heartbeat");
+function reveal(){
+    const img=document.getElementById("img");
+    img.classList.add("clear","heartbeat");
 
-    const text = "Every moment with you is magic ❤️";
-    let i = 0;
-    const el = document.getElementById("revealText");
+    const msg="Every moment with you is magic ❤️";
+    let i=0;
+    const el=document.getElementById("text");
 
-    function type() {
-        if (i < text.length) {
-            el.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, 50);
+    function type(){
+        if(i<msg.length){
+            el.innerHTML+=msg[i++];
+            setTimeout(type,50);
         }
     }
     type();
 }
 
-// 🌹❤️ Romantic Falling Particles (enhanced)
-const items = ["🌹","🌷","🌸","❤️","💕","💖","✨"];
-
-setInterval(() => {
-
-    for (let i = 0; i < 4; i++) { // 🔥 more particles
-
-        const p = document.createElement("div");
-        p.className = "petal";
-
-        // 🎲 random emoji
-        p.innerHTML = items[Math.floor(Math.random() * items.length)];
-
-        // 🎲 random position
-        p.style.left = Math.random() * 100 + "vw";
-
-        // 🎲 random size
-        p.style.fontSize = (Math.random() * 25 + 12) + "px";
-
-        // 🎲 random falling speed
-        p.style.animationDuration = (Math.random() * 3 + 4) + "s";
-
+/* 🌹 Falling particles */
+const items=["🌹","🌷","🌸","❤️","💕","💖","✨"];
+setInterval(()=>{
+    for(let i=0;i<4;i++){
+        let p=document.createElement("div");
+        p.className="petal";
+        p.innerHTML=items[Math.floor(Math.random()*items.length)];
+        p.style.left=Math.random()*100+"vw";
+        p.style.fontSize=(Math.random()*25+12)+"px";
+        p.style.animationDuration=(Math.random()*3+4)+"s";
         document.body.appendChild(p);
-
-        setTimeout(() => p.remove(), 7000);
+        setTimeout(()=>p.remove(),7000);
     }
+},200);
 
-}, 200); // faster spawn
+/* ✨ Sparkles */
+for(let i=0;i<30;i++){
+    let s=document.createElement("div");
+    s.className="sparkle";
+    let size=Math.random()*4+2;
+    s.style.width=size+"px";
+    s.style.height=size+"px";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+}
 
 </script>
 
