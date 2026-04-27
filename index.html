@@ -9,7 +9,7 @@
 body {
     margin: 0;
     font-family: 'Georgia', serif;
-    background: linear-gradient(135deg, #2b2e4a, #e84545);
+    background: radial-gradient(circle at top, #1a1a2e, #0f3460, #000);
     color: white;
     display: flex;
     justify-content: center;
@@ -18,14 +18,16 @@ body {
     overflow: hidden;
 }
 
-/* Glow */
-body::after {
-    content: "";
+/* 🌌 Galaxy stars */
+.star {
     position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(255,192,203,0.15), transparent 70%);
-    pointer-events: none;
+    background: white;
+    border-radius: 50%;
+    opacity: 0.8;
+    animation: twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle {
+    50% { opacity: 1; transform: scale(1.3); }
 }
 
 .card {
@@ -73,21 +75,12 @@ h3 { color: #ffd1dc; }
 /* Falling particles */
 .petal {
     position: absolute;
+    pointer-events:none;
     animation: fall linear infinite;
 }
 @keyframes fall {
-    to { transform: translateY(110vh); }
-}
-
-/* Sparkles */
-.sparkle {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: sparkle 3s infinite;
-}
-@keyframes sparkle {
-    50% { opacity: 1; transform: scale(1.2); }
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); opacity:0; }
 }
 </style>
 </head>
@@ -143,9 +136,12 @@ async function checkPasscode(){
     if(data.success) nextStep();
 }
 
+/* 💖 Reveal + Burst */
 function reveal(){
     const img=document.getElementById("img");
     img.classList.add("clear","heartbeat");
+
+    burstHearts(); // 💓 burst added
 
     const msg="Every moment with you is magic ❤️";
     let i=0;
@@ -160,41 +156,48 @@ function reveal(){
     type();
 }
 
-/* 🌹❤️ particles (no 💘) */
-const items=["🌹","🌷","🌸","❤️","💕","💖"];
+/* 💓 Burst effect */
+function burstHearts(){
+    for(let i=0;i<30;i++){
+        let h=document.createElement("div");
+        h.innerHTML=["❤️","💕","💖"][Math.floor(Math.random()*3)];
+        h.style.position="absolute";
+        h.style.left="50%";
+        h.style.top="50%";
+        h.style.fontSize=(Math.random()*20+15)+"px";
+        h.style.transition="1s ease-out";
+
+        document.body.appendChild(h);
+
+        setTimeout(()=>{
+            h.style.transform=`translate(${(Math.random()-0.5)*400}px, ${(Math.random()-0.5)*400}px)`;
+            h.style.opacity="0";
+        },10);
+
+        setTimeout(()=>h.remove(),1000);
+    }
+}
+
+/* 🌹 Falling emojis */
+const items=["🌹","🌷","🌸","❤️","💕","💖","✨"];
 setInterval(()=>{
-    for(let i=0;i<3;i++){
+    for(let i=0;i<4;i++){
         let p=document.createElement("div");
         p.className="petal";
         p.innerHTML=items[Math.floor(Math.random()*items.length)];
         p.style.left=Math.random()*100+"vw";
-        p.style.fontSize=(Math.random()*20+10)+"px";
+        p.style.fontSize=(Math.random()*25+12)+"px";
+        p.style.animationDuration=(Math.random()*3+4)+"s";
         document.body.appendChild(p);
-        setTimeout(()=>p.remove(),6000);
+        setTimeout(()=>p.remove(),7000);
     }
 },200);
 
-/* 💞 touch particles (no 💘) */
-const touchItems=["💖","💕","✨"];
-
-document.addEventListener("mousemove",(e)=>{
-    if(Math.random()<0.3){
-        let p=document.createElement("div");
-        p.innerHTML=touchItems[Math.floor(Math.random()*touchItems.length)];
-        p.style.position="absolute";
-        p.style.left=e.clientX+"px";
-        p.style.top=e.clientY+"px";
-        p.style.transition="1s";
-        document.body.appendChild(p);
-        setTimeout(()=>{p.style.opacity=0;p.remove();},1000);
-    }
-});
-
-/* ✨ sparkles */
-for(let i=0;i<30;i++){
+/* 🌌 Galaxy stars */
+for(let i=0;i<60;i++){
     let s=document.createElement("div");
-    s.className="sparkle";
-    let size=Math.random()*4+2;
+    s.className="star";
+    let size=Math.random()*3+1;
     s.style.width=size+"px";
     s.style.height=size+"px";
     s.style.left=Math.random()*100+"vw";
