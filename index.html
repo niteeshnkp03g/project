@@ -78,6 +78,58 @@ img {
     animation: fall linear infinite;
 }
 
+/* 💖 Passcode Screen Styling */
+
+.title {
+    font-size: 28px;
+    margin-bottom: 15px;
+    color: #fff;
+}
+
+.pass-box {
+    background: rgba(255,255,255,0.12);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.pass-text {
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+#passcode {
+    width: 80%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.unlock-btn {
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    border: none;
+    padding: 12px 25px;
+    border-radius: 25px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.unlock-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 118, 150, 0.6);
+}
+
+#error {
+    margin-top: 10px;
+    color: #ffd1dc;
+}
+
 @keyframes fall {
     0% {
         transform: translateY(-10vh) translateX(0);
@@ -128,12 +180,14 @@ function nextStep() {
 
     else if (step === shayari.length) {
         card.innerHTML = `
-            <h2>One Last Thing ❤️</h2>
-            <p>Enter our Love Passcode 🔐</p>
-            <input type="password" id="passcode">
-            <br>
-            <button class="next" onclick="checkPasscode()">Unlock 💕</button>
+           <h2 class="title">One Last Thing ❤️</h2>
+
+        <div class="pass-box">
+            <p class="pass-text">Enter our Love Passcode 🔐</p>
+            <input type="password" id="passcode" placeholder="••••••">
+            <button class="unlock-btn" onclick="checkPasscode()">Unlock 💕</button>
             <p id="error"></p>
+        </div>
         `;
     }
 
@@ -194,21 +248,14 @@ const items = ["🌹","🌷","🌸","❤️","💕","💖","✨"];
 
 setInterval(() => {
 
-    for (let i = 0; i < 4; i++) { // 🔥 more particles
+    for (let i = 0; i < 2; i++) { // reduced from 4 → 2
 
         const p = document.createElement("div");
         p.className = "petal";
 
-        // 🎲 random emoji
         p.innerHTML = items[Math.floor(Math.random() * items.length)];
-
-        // 🎲 random position
         p.style.left = Math.random() * 100 + "vw";
-
-        // 🎲 random size
         p.style.fontSize = (Math.random() * 25 + 12) + "px";
-
-        // 🎲 random falling speed
         p.style.animationDuration = (Math.random() * 3 + 4) + "s";
 
         document.body.appendChild(p);
@@ -216,7 +263,7 @@ setInterval(() => {
         setTimeout(() => p.remove(), 7000);
     }
 
-}, 200); // faster spawn
+}, 600); // slower spawn (was 200)
 
 </script>
 
