@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <title>💖 For Chakli 💖</title>
 
@@ -72,7 +72,6 @@ body{
 .welcome-quote .quote-text{
     font-size:20px;
     line-height:1.6;
-    text-align:center;
 }
 
 /* TITLES */
@@ -88,7 +87,7 @@ h3{
     margin-bottom:18px;
 }
 
-/* CONTENT */
+/* MEMORY */
 
 .memory-container{
     width:100%;
@@ -98,7 +97,7 @@ h3{
     gap:24px;
 }
 
-/* IMAGE */
+/* IMAGE CARD */
 
 .image-card{
     position:relative;
@@ -150,7 +149,7 @@ h3{
     animation:imagePulse 2.8s ease-in-out infinite;
 }
 
-/* QUOTES */
+/* QUOTE CARD */
 
 .quote-card{
     width:520px;
@@ -179,9 +178,7 @@ h3{
     width:100%;
     font-size:18px;
     line-height:1.7;
-    white-space:normal;
     text-align:center;
-    word-break:break-word;
     max-width:430px;
     margin:auto;
 }
@@ -243,7 +240,46 @@ h3{
     color:#ffd1dc;
 }
 
-/* FINAL */
+/* FINAL SCREEN */
+
+.final-wrapper{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
+
+.final-content{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+    margin-top:10px;
+}
+
+.final-image-card{
+    width:240px;
+    height:320px;
+    min-width:auto;
+}
+
+.final-quote-card{
+    width:100%;
+    max-width:760px;
+    min-height:auto;
+    padding:24px 22px;
+}
+
+.final-quote-card .quote-text{
+    max-width:640px;
+    font-size:18px;
+    line-height:1.8;
+}
+
+/* EFFECTS */
 
 .blur{
     filter:blur(20px) brightness(0.7);
@@ -433,7 +469,20 @@ h3{
 
     .welcome-quote .quote-text{
         font-size:16px;
-        line-height:1.5;
+    }
+
+    .final-image-card{
+        width:190px;
+        height:250px;
+    }
+
+    .final-quote-card{
+        padding:18px 14px;
+    }
+
+    .final-quote-card .quote-text{
+        font-size:15px;
+        line-height:1.6;
     }
 }
 
@@ -641,26 +690,32 @@ ${memories[step].text}
 
         card.innerHTML=`
 
-            <h2>💖 Forever Us 💖</h2>
+            <div class="final-wrapper">
 
-            <div class="image-card"
-                 style="margin:auto;">
+                <h2>💖 Forever Us 💖</h2>
 
-                <img
-                    id="loveImage"
-                    src="./images/final.jpg"
-                    class="memory-image blur"
-                >
+                <div class="final-content">
 
-            </div>
+                    <div class="image-card final-image-card">
 
-            <div class="quote-card"
-                 style="margin-top:20px; min-height:auto;">
+                        <img
+                            id="loveImage"
+                            src="./images/final.jpg"
+                            class="memory-image blur"
+                        >
 
-                <div
-                    id="revealText"
-                    class="quote-text"
-                ></div>
+                    </div>
+
+                    <div class="quote-card final-quote-card">
+
+                        <div
+                            id="revealText"
+                            class="quote-text"
+                        ></div>
+
+                    </div>
+
+                </div>
 
             </div>
         `;
@@ -744,7 +799,7 @@ my safest place is still beside you ❤️`;
     type();
 }
 
-/* FALLING EMOJIS */
+/* EMOJIS */
 
 const items=[
 "🌹","🌷","🌸",
