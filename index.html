@@ -1,602 +1,592 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-<title>💖 Chakli 💖</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html,
-body{
-    width:100%;
-    overflow-x:hidden;
-}
-
-body{
-    font-family:'Georgia',serif;
-    background:linear-gradient(135deg,#2b2e4a,#e84545);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    min-height:100vh;
-    padding:14px;
-    position:relative;
-    overflow:hidden;
-}
-
-/* MAIN CARD */
-
-.card{
-    width:100%;
-    max-width:980px;
-    padding:24px;
-    border-radius:26px;
-    background:rgba(255,255,255,0.08);
-    backdrop-filter:blur(14px);
-    box-shadow:0 0 35px rgba(0,0,0,0.35);
-    position:relative;
-    z-index:5;
-    overflow:hidden;
-    text-align:center;
-}
-
-/* WELCOME */
-
-.welcome-box{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:22px;
-    padding:10px 0;
-}
-
-.welcome-quote{
-    width:100%;
-    max-width:700px;
-    min-height:auto;
-    padding:28px 24px;
-}
-
-.welcome-quote .quote-text{
-    font-size:20px;
-    line-height:1.6;
-}
-
-/* TITLES */
-
-h2{
-    font-size:34px;
-    margin-bottom:18px;
-}
-
-/* MEMORY */
-
-.memory-container{
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:24px;
-}
-
-/* IMAGE CARD */
-
-.image-card{
-    position:relative;
-    width:250px;
-    min-width:250px;
-    height:340px;
-    padding:7px;
-    border-radius:26px;
-    overflow:hidden;
-    animation:floatCard 3s ease-in-out infinite;
-    flex-shrink:0;
-}
-
-.image-card::before{
-    content:"";
-    position:absolute;
-    inset:-2px;
-    border-radius:26px;
-
-    background:linear-gradient(
-        45deg,
-        #ff6b81,
-        #ff8fab,
-        #ffd6e0,
-        #ff6b81
-    );
-
-    background-size:300% 300%;
-    animation:borderGlow 4s linear infinite;
-    z-index:0;
-}
-
-.image-card::after{
-    content:"";
-    position:absolute;
-    inset:4px;
-    background:#6b3f50;
-    border-radius:20px;
-    z-index:1;
-}
-
-.memory-image{
-    position:relative;
-    z-index:2;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    border-radius:18px;
-    animation:imagePulse 2.8s ease-in-out infinite;
-}
-
-/* QUOTE CARD */
-
-.quote-card{
-    width:520px;
-    min-height:280px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:22px 26px;
-    border-radius:22px;
-    background:rgba(255,255,255,0.12);
-    position:relative;
-    overflow:hidden;
-    animation:quoteGlow 3s ease-in-out infinite;
-}
-
-.quote-card::before{
-    content:"💖";
-    position:absolute;
-    top:10px;
-    right:14px;
-    font-size:24px;
-    animation:blink 1.5s infinite;
-}
-
-.quote-text{
-    width:100%;
-    font-size:18px;
-    line-height:1.7;
-    text-align:center;
-    max-width:430px;
-    margin:auto;
-}
-
-.year-title{
-    font-size:26px;
-    color:#ffd1dc;
-    margin-bottom:28px;
-    font-weight:bold;
-}
-
-/* BUTTON */
-
-.next{
-    margin-top:22px;
-    background:white;
-    color:#333;
-    border:none;
-    border-radius:12px;
-    padding:12px 22px;
-    font-size:14px;
-    cursor:pointer;
-    transition:0.3s;
-}
-
-.next:hover{
-    transform:scale(1.05);
-}
-
-/* PASSCODE */
-
-.pass-box{
-    width:100%;
-    max-width:420px;
-    margin:auto;
-    background:rgba(255,255,255,0.12);
-    padding:24px;
-    border-radius:22px;
-}
-
-#passcode{
-    width:100%;
-    padding:13px;
-    border:none;
-    border-radius:12px;
-    outline:none;
-    font-size:16px;
-    text-align:center;
-    margin-top:14px;
-}
-
-.unlock-btn{
-    margin-top:14px;
-    width:100%;
-    background:linear-gradient(135deg,#ff758c,#ff7eb3);
-    border:none;
-    color:white;
-    border-radius:26px;
-    padding:12px;
-    font-size:15px;
-    cursor:pointer;
-}
-
-#error{
-    margin-top:10px;
-    color:#ffd1dc;
-}
-
-/* FINAL SCREEN */
-
-.final-wrapper{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-}
-
-.final-content{
-    width:100%;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:22px;
-    margin-top:10px;
-}
-
-.final-image-card{
-    width:240px;
-    height:320px;
-    min-width:auto;
-}
-
-.final-quote-card{
-    width:100%;
-    max-width:760px;
-    min-height:auto;
-    padding:24px 22px;
-}
-
-.final-quote-card .quote-text{
-    max-width:640px;
-    font-size:18px;
-    line-height:1.8;
-}
-
-/* EFFECTS */
-
-.blur{
-    filter:blur(20px) brightness(0.7);
-    transform:scale(1.05);
-    transition:all 2s ease;
-}
-
-.clear{
-    filter:blur(0);
-    transform:scale(1);
-}
-
-.heartbeat{
-    animation:beat 1s infinite;
-}
-
-/* ANIMATIONS */
-
-@keyframes beat{
-    0%,100%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.03);
-    }
-}
-
-@keyframes imagePulse{
-    0%,100%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.03);
-    }
-}
-
-@keyframes borderGlow{
-    0%{
-        background-position:0% 50%;
-    }
-    100%{
-        background-position:100% 50%;
-    }
-}
-
-@keyframes floatCard{
-    0%,100%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-6px);
-    }
-}
-
-@keyframes quoteGlow{
-    0%,100%{
-        box-shadow:0 0 18px rgba(255,255,255,0.08);
-    }
-    50%{
-        box-shadow:0 0 28px rgba(255,192,203,0.28);
-    }
-}
-
-@keyframes blink{
-    0%,100%{
-        opacity:1;
-    }
-    50%{
-        opacity:0.3;
-    }
-}
-
-/* EMOJIS */
-
-.side-emoji{
-    position:absolute;
-    z-index:1;
-    pointer-events:none;
-    animation:sideFall linear infinite;
-}
-
-@keyframes sideFall{
-
-    0%{
-        transform:translateY(-10vh) scale(0.8);
-        opacity:0;
-    }
-
-    15%{
-        opacity:1;
-    }
-
-    50%{
-        transform:translateY(50vh) translateX(10px);
-    }
-
-    100%{
-        transform:translateY(110vh) translateX(-10px);
-        opacity:0;
-    }
-}
-
-/* RESPONSIVE */
-
-@media screen and (max-width:900px){
-
-    body{
-        overflow-y:auto;
-        padding:12px;
-    }
-
-    .card{
-        padding:20px 14px;
-    }
-
-    .memory-container{
-        flex-direction:column;
-        gap:18px;
-    }
-
-    .image-card{
-        width:220px;
-        min-width:auto;
-        height:300px;
-    }
-
-    .quote-card{
-        width:100%;
-        min-height:auto;
-        padding:18px 14px;
-    }
-
-    .quote-text{
-        font-size:16px;
-        line-height:1.6;
-        max-width:100%;
-    }
-
-    .year-title{
-        font-size:22px;
-    }
-
-    h2{
-        font-size:28px;
-    }
-}
-
-@media screen and (max-width:600px){
-
-    .card{
-        padding:16px 10px;
-        border-radius:20px;
-    }
-
-    .image-card{
-        width:190px;
-        height:255px;
-    }
-
-    .quote-card{
-        padding:16px 12px;
-        border-radius:18px;
-    }
-
-    .quote-text{
-        font-size:15px;
-        line-height:1.5;
-    }
-
-    .year-title{
-        font-size:20px;
-    }
-
-    h2{
-        font-size:24px;
-    }
-
-    .next{
-        width:130px;
-        padding:10px 12px;
-        font-size:13px;
-    }
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="card" id="card">
-
-    <div class="welcome-box">
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>💖 Chakli 💖</title>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      body {
+        font-family: "Georgia", serif;
+        background: linear-gradient(135deg, #2b2e4a, #e84545);
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 14px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* MAIN CARD */
+
+      .card {
+        width: 100%;
+        max-width: 980px;
+        padding: 24px;
+        border-radius: 26px;
+        background: rgba(255, 255, 255, 0.08);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 0 35px rgba(0, 0, 0, 0.35);
+        position: relative;
+        z-index: 5;
+        overflow: hidden;
+        text-align: center;
+      }
+
+      /* WELCOME */
+
+      .welcome-box {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        padding: 10px 0;
+      }
+
+      .welcome-quote {
+        width: 100%;
+        max-width: 700px;
+        min-height: auto;
+        padding: 28px 24px;
+      }
+
+      .welcome-quote .quote-text {
+        font-size: 20px;
+        line-height: 1.6;
+      }
+
+      /* TITLES */
+
+      h2 {
+        font-size: 34px;
+        margin-bottom: 6px;
+      }
+
+      h3 {
+        font-size: 24px;
+        color: #ffd1dc;
+        margin-bottom: 18px;
+      }
+
+      /* MEMORY */
+
+      .memory-container {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 24px;
+      }
+
+      /* IMAGE CARD */
+
+      .image-card {
+        position: relative;
+        width: 250px;
+        min-width: 250px;
+        height: 340px;
+        padding: 7px;
+        border-radius: 26px;
+        overflow: hidden;
+        animation: floatCard 3s ease-in-out infinite;
+        flex-shrink: 0;
+      }
+
+      .image-card::before {
+        content: "";
+        position: absolute;
+        inset: -2px;
+        border-radius: 26px;
+
+        background: linear-gradient(45deg, #ff6b81, #ff8fab, #ffd6e0, #ff6b81);
+
+        background-size: 300% 300%;
+        animation: borderGlow 4s linear infinite;
+        z-index: 0;
+      }
+
+      .image-card::after {
+        content: "";
+        position: absolute;
+        inset: 4px;
+        background: #6b3f50;
+        border-radius: 20px;
+        z-index: 1;
+      }
+
+      .memory-image {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 18px;
+        animation: imagePulse 2.8s ease-in-out infinite;
+      }
+
+      /* QUOTE CARD */
+
+      .quote-card {
+        width: 520px;
+        min-height: 280px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 22px 26px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.12);
+        position: relative;
+        overflow: hidden;
+        animation: quoteGlow 3s ease-in-out infinite;
+      }
+
+      .quote-card::before {
+        content: "💖";
+        position: absolute;
+        top: 10px;
+        right: 14px;
+        font-size: 24px;
+        animation: blink 1.5s infinite;
+      }
+
+      .quote-text {
+        width: 100%;
+        font-size: 18px;
+        line-height: 1.7;
+        text-align: center;
+        max-width: 430px;
+        margin: auto;
+      }
+
+      /* BUTTON */
+
+      .next {
+        margin-top: 22px;
+        background: white;
+        color: #333;
+        border: none;
+        border-radius: 12px;
+        padding: 12px 22px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      .next:hover {
+        transform: scale(1.05);
+      }
+
+      /* PASSCODE */
+
+      .pass-box {
+        width: 100%;
+        max-width: 420px;
+        margin: auto;
+        background: rgba(255, 255, 255, 0.12);
+        padding: 24px;
+        border-radius: 22px;
+      }
+
+      #passcode {
+        width: 100%;
+        padding: 13px;
+        border: none;
+        border-radius: 12px;
+        outline: none;
+        font-size: 16px;
+        text-align: center;
+        margin-top: 14px;
+      }
+
+      .unlock-btn {
+        margin-top: 14px;
+        width: 100%;
+        background: linear-gradient(135deg, #ff758c, #ff7eb3);
+        border: none;
+        color: white;
+        border-radius: 26px;
+        padding: 12px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      #error {
+        margin-top: 10px;
+        color: #ffd1dc;
+      }
+
+      /* FINAL SCREEN */
+
+      .final-wrapper {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .final-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        margin-top: 10px;
+      }
+
+      .final-image-card {
+        width: 240px;
+        height: 320px;
+        min-width: auto;
+      }
+
+      .final-quote-card {
+        width: 100%;
+        max-width: 760px;
+        min-height: auto;
+        padding: 24px 22px;
+      }
+
+      .final-quote-card .quote-text {
+        max-width: 640px;
+        font-size: 18px;
+        line-height: 1.8;
+      }
+
+      /* EFFECTS */
+
+      .blur {
+        filter: blur(20px) brightness(0.7);
+        transform: scale(1.05);
+        transition: all 2s ease;
+      }
+
+      .clear {
+        filter: blur(0);
+        transform: scale(1);
+      }
+
+      .heartbeat {
+        animation: beat 1s infinite;
+      }
+
+      /* ANIMATIONS */
+
+      @keyframes beat {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
+        }
+      }
+
+      @keyframes imagePulse {
+        0%,
+        100% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.03);
+        }
+      }
+
+      @keyframes borderGlow {
+        0% {
+          background-position: 0% 50%;
+        }
+        100% {
+          background-position: 100% 50%;
+        }
+      }
+
+      @keyframes floatCard {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      @keyframes quoteGlow {
+        0%,
+        100% {
+          box-shadow: 0 0 18px rgba(255, 255, 255, 0.08);
+        }
+        50% {
+          box-shadow: 0 0 28px rgba(255, 192, 203, 0.28);
+        }
+      }
+
+      @keyframes blink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.3;
+        }
+      }
+
+      /* EMOJIS */
+
+      .side-emoji {
+        position: absolute;
+        z-index: 1;
+        pointer-events: none;
+        animation: sideFall linear infinite;
+      }
+
+      @keyframes sideFall {
+        0% {
+          transform: translateY(-10vh) scale(0.8);
+          opacity: 0;
+        }
+
+        15% {
+          opacity: 1;
+        }
+
+        50% {
+          transform: translateY(50vh) translateX(10px);
+        }
+
+        100% {
+          transform: translateY(110vh) translateX(-10px);
+          opacity: 0;
+        }
+      }
+
+      /* RESPONSIVE */
+
+      @media screen and (max-width: 900px) {
+        body {
+          overflow-y: auto;
+          padding: 12px;
+        }
+
+        .card {
+          padding: 20px 14px;
+        }
+
+        .memory-container {
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        .image-card {
+          width: 220px;
+          min-width: auto;
+          height: 300px;
+        }
+
+        .quote-card {
+          width: 100%;
+          min-height: auto;
+          padding: 18px 14px;
+        }
+
+        .quote-text {
+          font-size: 16px;
+          line-height: 1.6;
+          max-width: 100%;
+        }
+
+        h2 {
+          font-size: 28px;
+        }
+
+        h3 {
+          font-size: 20px;
+        }
+      }
+
+      @media screen and (max-width: 600px) {
+        .card {
+          padding: 16px 10px;
+          border-radius: 20px;
+        }
+
+        .image-card {
+          width: 190px;
+          height: 255px;
+        }
+
+        .quote-card {
+          padding: 16px 12px;
+          border-radius: 18px;
+        }
+
+        .quote-text {
+          font-size: 15px;
+          line-height: 1.5;
+        }
+
+        h2 {
+          font-size: 24px;
+        }
+
+        h3 {
+          font-size: 18px;
+        }
+
+        .next {
+          width: 130px;
+          padding: 10px 12px;
+          font-size: 13px;
+        }
+
+        .welcome-quote {
+          padding: 22px 16px;
+        }
+
+        .welcome-quote .quote-text {
+          font-size: 16px;
+        }
+
+        .final-image-card {
+          width: 190px;
+          height: 250px;
+        }
+
+        .final-quote-card {
+          padding: 18px 14px;
+        }
+
+        .final-quote-card .quote-text {
+          font-size: 15px;
+          line-height: 1.6;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card" id="card">
+      <div class="welcome-box">
         <h2>💖 Hey Chakli 💖</h2>
 
         <div class="quote-card welcome-quote">
-
-            <div class="quote-text">
-                I want to show you something special ❤️
-            </div>
-
+          <div class="quote-text">I want to show you something special ❤️</div>
         </div>
 
-        <button class="next" onclick="nextStep()">
-            Start 💌
-        </button>
-
+        <button class="next" onclick="nextStep()">Start 💌</button>
+      </div>
     </div>
 
-</div>
+    <script>
+      let step = -1;
 
-<script>
-
-let step=-1;
-
-const memories=[
-
-{
-image:"./images/1.jpg",
-title:"Year 1 💖",
-text:
-`The day you entered my life,
+      const memories = [
+        {
+          image: "./images/1.jpg",
+          title: "Year 1 💖",
+          text: `The day you entered my life,
 love stopped feeling like a dream and became real.
 
 Without even realizing it,
-my heart had already started calling you home.`
-},
+my heart had already started calling you home.`,
+        },
 
-{
-image:"./images/2.jpg",
-title:"Year 2 💖",
-text:
-`Between endless conversations,
+        {
+          image: "./images/2.jpg",
+          title: "Year 2 💖",
+          text: `Between endless conversations,
 random laughs, fights, and long nights,
 
 you slowly became the person
-I could never stay away from.`
-},
+I could never stay away from.`,
+        },
 
-{
-image:"./images/3.png",
-title:"Year 3 💖",
-text:
-`Sometimes pain created distance,
+        {
+          image: "./images/3.png",
+          title: "Year 3 💖",
+          text: `Sometimes pain created distance,
 and silence stayed between us longer than expected.
 
 Yet even during those quiet moments,
-our hearts never truly stopped finding each other.`
-},
+our hearts never truly stopped finding each other.`,
+        },
 
-{
-image:"./images/4.jpg",
-title:"Year 4 💖",
-text:
-`Love was never about perfect days,
+        {
+          image: "./images/4.jpg",
+          title: "Year 4 💖",
+          text: `Love was never about perfect days,
 but about staying together during difficult moments.
 
 No matter what happened,
-we kept holding each other tighter.`
-},
+we kept holding each other tighter.`,
+        },
 
-{
-image:"./images/5.jpg",
-title:"Year 5 💖",
-text:
-`Your smile became my peace,
+        {
+          image: "./images/5.jpg",
+          title: "Year 5 💖",
+          text: `Your smile became my peace,
 and your presence became my comfort.
 
 Even during storms,
-we kept choosing each other.`
-},
+we kept choosing each other.`,
+        },
 
-{
-image:"./images/6.jpg",
-title:"Year 6 💖",
-text:
-`We faced emotional nights,
+        {
+          image: "./images/6.jpg",
+          title: "Year 6 💖",
+          text: `We faced emotional nights,
 silent moments, pain, and fears.
 
 Yet somehow,
-our love survived everything together.`
-},
+our love survived everything together.`,
+        },
 
-{
-image:"./images/7.jpg",
-title:"Year 7 💖",
-text:
-`Forever stopped sounding impossible
+        {
+          image: "./images/7.jpg",
+          title: "Year 7 💖",
+          text: `Forever stopped sounding impossible
 because every future I imagined
 
 always had you beside me,
-holding my hand.`
-},
+holding my hand.`,
+        },
 
-{
-image:"./images/8.jpg",
-title:"Year 8 💖",
-text:
-`Eight years later,
+        {
+          image: "./images/8.jpg",
+          title: "Year 8 💖",
+          text: `Eight years later,
 this love carries patience, healing, and loyalty.
 
 We were never perfect,
-but we never stopped choosing each other.`
-}
+but we never stopped choosing each other.`,
+        },
+      ];
 
-];
+      function nextStep() {
+        step++;
 
-function nextStep(){
+        const card = document.getElementById("card");
 
-    step++;
-
-    const card=document.getElementById("card");
-
-    if(step < memories.length){
-
-        card.innerHTML=`
+        if (step < memories.length) {
+          card.innerHTML = `
 
             <h2>💖 For You Chakli 💖</h2>
 
@@ -613,17 +603,23 @@ function nextStep(){
 
                 <div class="quote-card">
 
-                    <div class="quote-text">
+    <div class="quote-text">
 
-                        <div class="year-title">
-                            💖 ${memories[step].title} 
-                        </div>
+        <div style="
+            font-size:26px;
+            color:#ffd1dc;
+            margin-bottom:28px;
+            font-weight:bold;
+            text-align:center;
+        ">
+            💖 ${memories[step].title.replace(" 💖", "")} 💖
+        </div>
 
 ${memories[step].text}
 
-                    </div>
+    </div>
 
-                </div>
+</div>
 
             </div>
 
@@ -631,11 +627,8 @@ ${memories[step].text}
                 Next 💌
             </button>
         `;
-    }
-
-    else if(step === memories.length){
-
-        card.innerHTML=`
+        } else if (step === memories.length) {
+          card.innerHTML = `
 
             <h2>💖 One Last Thing 💖</h2>
 
@@ -665,10 +658,136 @@ ${memories[step].text}
 
             </div>
         `;
-    }
-}
+        } else if (step === memories.length + 1) {
+          card.innerHTML = `
 
-</script>
+            <div class="final-wrapper">
 
-</body>
+                <h2>💖 Forever Us 💖</h2>
+
+                <div class="final-content">
+
+                    <div class="image-card final-image-card">
+
+                        <img
+                            id="loveImage"
+                            src="./images/final.jpg"
+                            class="memory-image blur"
+                        >
+
+                    </div>
+
+                    <div class="quote-card final-quote-card">
+
+                        <div
+                            id="revealText"
+                            class="quote-text"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        `;
+
+          setTimeout(revealImage, 1500);
+        }
+      }
+
+      async function checkPasscode() {
+        const input = document.getElementById("passcode").value;
+
+        const error = document.getElementById("error");
+
+        try {
+          const res = await fetch("/.netlify/functions/verify", {
+            method: "POST",
+
+            headers: {
+              "Content-Type": "application/json",
+            },
+
+            body: JSON.stringify({
+              passcode: input,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (data.success) {
+            nextStep();
+          } else {
+            error.innerText = "Wrong passcode ❤️";
+          }
+        } catch {
+          error.innerText = "Error";
+        }
+      }
+
+      function revealImage() {
+        const img = document.getElementById("loveImage");
+
+        img.classList.remove("blur");
+
+        img.classList.add("clear", "heartbeat");
+
+        const text = `From strangers to soulmates,
+from late-night talks to healing,
+from holding hands to holding hearts,
+we grew through every season together.
+
+Eight years later,
+my safest place is still beside you ❤️`;
+
+        let i = 0;
+
+        const el = document.getElementById("revealText");
+
+        function type() {
+          if (i < text.length) {
+            el.innerHTML += text.charAt(i);
+
+            i++;
+
+            setTimeout(type, 40);
+          }
+        }
+
+        type();
+      }
+
+      /* EMOJIS */
+
+      const items = ["🌹", "🌷", "🌸", "❤️", "💕", "💖", "✨", "💘", "🥰"];
+
+      setInterval(() => {
+        for (let i = 0; i < 4; i++) {
+          const p = document.createElement("div");
+
+          p.className = "side-emoji";
+
+          p.innerHTML = items[Math.floor(Math.random() * items.length)];
+
+          const side = Math.random() > 0.5;
+
+          if (side) {
+            p.style.left = Math.random() * 10 + "vw";
+          } else {
+            p.style.right = Math.random() * 10 + "vw";
+          }
+
+          p.style.top = "-10vh";
+
+          p.style.fontSize = Math.random() * 14 + 16 + "px";
+
+          p.style.animationDuration = Math.random() * 4 + 5 + "s";
+
+          document.body.appendChild(p);
+
+          setTimeout(() => p.remove(), 9000);
+        }
+      }, 700);
+    </script>
+  </body>
 </html>
