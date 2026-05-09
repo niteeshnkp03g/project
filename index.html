@@ -498,10 +498,14 @@
     <script>
       let step = -1;
 
-      const unlockDate = new Date("2026-05-14T00:00:00+05:30");
+      async function checkUnlockStatus() {
+        try {
+          const res = await fetch("/.netlify/functions/checkUnlock");
 
-      if (new Date() < unlockDate) {
-        document.getElementById("card").innerHTML = `
+          const data = await res.json();
+
+          if (!data.unlocked) {
+            document.getElementById("card").innerHTML = `
 
         <div class="welcome-box">
 
@@ -510,17 +514,23 @@
             <div class="quote-card welcome-quote">
 
                 <div class="quote-text">
-                     Surprise will be unlocked after 14 May, 12:00 AM IST, my love Chakli ❤️
+                    Surprise will be unlocked after 14 May, 12:00 AM IST, my love Chakli ❤️
                 </div>
 
             </div>
 
         </div>
 
-    `;
+      `;
 
-        throw new Error("Content Locked");
+            throw new Error("Content Locked");
+          }
+        } catch (err) {
+          console.error(err);
+        }
       }
+
+      checkUnlockStatus();
 
       const memories = [
         {
