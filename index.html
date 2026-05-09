@@ -78,12 +78,6 @@ body{
 
 h2{
     font-size:34px;
-    margin-bottom:6px;
-}
-
-h3{
-    font-size:24px;
-    color:#ffd1dc;
     margin-bottom:18px;
 }
 
@@ -181,6 +175,13 @@ h3{
     text-align:center;
     max-width:430px;
     margin:auto;
+}
+
+.year-title{
+    font-size:26px;
+    color:#ffd1dc;
+    margin-bottom:28px;
+    font-weight:bold;
 }
 
 /* BUTTON */
@@ -418,12 +419,12 @@ h3{
         max-width:100%;
     }
 
-    h2{
-        font-size:28px;
+    .year-title{
+        font-size:22px;
     }
 
-    h3{
-        font-size:20px;
+    h2{
+        font-size:28px;
     }
 }
 
@@ -449,40 +450,18 @@ h3{
         line-height:1.5;
     }
 
-    h2{
-        font-size:24px;
+    .year-title{
+        font-size:20px;
     }
 
-    h3{
-        font-size:18px;
+    h2{
+        font-size:24px;
     }
 
     .next{
         width:130px;
         padding:10px 12px;
         font-size:13px;
-    }
-
-    .welcome-quote{
-        padding:22px 16px;
-    }
-
-    .welcome-quote .quote-text{
-        font-size:16px;
-    }
-
-    .final-image-card{
-        width:190px;
-        height:250px;
-    }
-
-    .final-quote-card{
-        padding:18px 14px;
-    }
-
-    .final-quote-card .quote-text{
-        font-size:15px;
-        line-height:1.6;
     }
 }
 
@@ -621,8 +600,6 @@ function nextStep(){
 
             <h2>💖 For You Chakli 💖</h2>
 
-            <h3>${memories[step].title}</h3>
-
             <div class="memory-container">
 
                 <div class="image-card">
@@ -637,6 +614,10 @@ function nextStep(){
                 <div class="quote-card">
 
                     <div class="quote-text">
+
+                        <div class="year-title">
+                            💖 ${memories[step].title} 
+                        </div>
 
 ${memories[step].text}
 
@@ -685,167 +666,7 @@ ${memories[step].text}
             </div>
         `;
     }
-
-    else if(step === memories.length + 1){
-
-        card.innerHTML=`
-
-            <div class="final-wrapper">
-
-                <h2>💖 Forever Us 💖</h2>
-
-                <div class="final-content">
-
-                    <div class="image-card final-image-card">
-
-                        <img
-                            id="loveImage"
-                            src="./images/final.jpg"
-                            class="memory-image blur"
-                        >
-
-                    </div>
-
-                    <div class="quote-card final-quote-card">
-
-                        <div
-                            id="revealText"
-                            class="quote-text"
-                        ></div>
-
-                    </div>
-
-                </div>
-
-            </div>
-        `;
-
-        setTimeout(revealImage,1500);
-    }
 }
-
-async function checkPasscode(){
-
-    const input=document.getElementById("passcode").value;
-
-    const error=document.getElementById("error");
-
-    try{
-
-        const res=await fetch("/.netlify/functions/verify",{
-
-            method:"POST",
-
-            headers:{
-                "Content-Type":"application/json"
-            },
-
-            body:JSON.stringify({
-                passcode:input
-            })
-        });
-
-        const data=await res.json();
-
-        if(data.success){
-
-            nextStep();
-
-        }else{
-
-            error.innerText="Wrong passcode ❤️";
-        }
-
-    }catch{
-
-        error.innerText="Error";
-    }
-}
-
-function revealImage(){
-
-    const img=document.getElementById("loveImage");
-
-    img.classList.remove("blur");
-
-    img.classList.add("clear","heartbeat");
-
-    const text=
-
-`From strangers to soulmates,
-from late-night talks to healing,
-from holding hands to holding hearts,
-we grew through every season together.
-
-Eight years later,
-my safest place is still beside you ❤️`;
-
-    let i=0;
-
-    const el=document.getElementById("revealText");
-
-    function type(){
-
-        if(i < text.length){
-
-            el.innerHTML += text.charAt(i);
-
-            i++;
-
-            setTimeout(type,40);
-        }
-    }
-
-    type();
-}
-
-/* EMOJIS */
-
-const items=[
-"🌹","🌷","🌸",
-"❤️","💕","💖",
-"✨","💘","🥰"
-];
-
-setInterval(()=>{
-
-    for(let i=0;i<4;i++){
-
-        const p=document.createElement("div");
-
-        p.className="side-emoji";
-
-        p.innerHTML=
-            items[Math.floor(Math.random()*items.length)];
-
-        const side=Math.random() > 0.5;
-
-        if(side){
-
-            p.style.left=
-                (Math.random()*10)+"vw";
-
-        }else{
-
-            p.style.right=
-                (Math.random()*10)+"vw";
-        }
-
-        p.style.top="-10vh";
-
-        p.style.fontSize=
-            (Math.random()*14+16)+"px";
-
-        p.style.animationDuration=
-            (Math.random()*4+5)+"s";
-
-        document.body.appendChild(p);
-
-        setTimeout(()=>p.remove(),9000);
-
-    }
-
-},700);
 
 </script>
 
