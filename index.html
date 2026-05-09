@@ -1,3 +1,6 @@
+# Updated Birthday Surprise HTML (Unlocks Exactly at 14 May • 12:00 AM)
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,7 +34,7 @@ body {
 
 p {
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.7;
     background: rgba(255,255,255,0.1);
     padding: 15px;
     border-radius: 12px;
@@ -42,7 +45,15 @@ h3 {
     color: #ffd1dc;
 }
 
-.next { background: white; color: #333; padding:10px 18px; border:none; border-radius:8px; }
+.next {
+    background: white;
+    color: #333;
+    padding:10px 18px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top: 10px;
+}
 
 img {
     width: 100%;
@@ -50,7 +61,6 @@ img {
     margin-top: 10px;
 }
 
-/* 💖 Blur */
 .blur {
     filter: blur(20px) brightness(0.7);
     transform: scale(1.05);
@@ -62,23 +72,20 @@ img {
     transform: scale(1);
 }
 
-/* 💓 Heartbeat */
 .heartbeat {
     animation: beat 1s infinite;
 }
+
 @keyframes beat {
     0%,100% { transform: scale(1); }
     50% { transform: scale(1.05); }
 }
 
-/* 🌹 Petals */
 .petal {
     position: absolute;
     pointer-events: none;
     animation: fall linear infinite;
 }
-
-/* 💖 Passcode Screen Styling */
 
 .title {
     font-size: 28px;
@@ -151,7 +158,7 @@ img {
 <div class="card" id="card">
     <h2>Hey Chakli ❤️</h2>
     <p>I want to show you something special...</p>
-    <button class="next" onclick="nextStep()">Start 💌</button>
+    <button class="next" onclick="startExperience()">Start 💌</button>
 </div>
 
 <script>
@@ -159,367 +166,55 @@ img {
 let step = -1;
 
 const shayari = [
-"Har nayi subah tumse roshan ho—yehi meri zindagi ka sabse haseen ehsaas hai.",
-"Har din tumhari muskaan se shuru ho—yehi meri khushiyon ka sabse bada raaz hai.",
-"Har lamha tumhare saath beet jaaye—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har saans mein tum basi raho—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har raat tumhare khayalon mein dhal jaaye—yehi meri neendon ka sabse haseen safar hai.",
-"Har mod par tumhara saath mile—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har dua mein tumhara naam aaye—yehi meri ibadat ka sabse khaas hissa hai.",
-"Har khushi tumse jud jaaye—yehi meri zindagi ka sabse khoobsurat iraada hai.",
-"Har din tumse aur zyada pyaar ho—yehi meri chahat ki sabse gehri baat hai.",
-"Har pal tumhara ehsaas rahe—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri soch mein raho—yehi meri mohabbat ka sabse haseen asar hai.",
-"Har kahani tumse shuru ho—yehi meri zindagi ka sabse khoobsurat daur hai.",
-"Har muskaan tumhari wajah se aaye—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har rishte se badhkar tumhara saath ho—yehi meri zindagi ka sabse bada tohfa hai.",
-"Har nayi umeed tumse judi ho—yehi meri zindagi ka sabse pyaara sach hai.",
-"Har din tumhare saath aur khoobsurat lage—yehi meri zindagi ka sabse haseen rang hai.",
-"Har yaad mein tum basi raho—yehi meri mohabbat ka sabse gehra ehsaas hai.",
-"Har pal tumhare kareeb rehna ho—yehi meri zindagi ka sabse bada armaan hai.",
-"Har khwab mein tum nazar aao—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari baaton se mehka rahe—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har ehsaas tumse juda ho—yehi meri mohabbat ki sabse badi sachchai hai.",
-"Har waqt tum mera sukoon bano—yehi meri zindagi ka sabse bada inaam hai.",
-"Har din tumhare bina adhoora lage—yehi meri mohabbat ka sabse gehra rang hai.",
-"Har pal tumhari yaadon mein kho jaun—yehi meri zindagi ka sabse haseen safar hai.",
-"Har lamha tumhari baahon ka ehsaas ho—yehi meri khushiyon ka sabse bada raaz hai.",
-"Har din tumhare saath ek nayi kahani likhun—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har raat tumhari baaton se roshan ho—yehi meri neendon ka sabse khoobsurat noor hai.",
-"Har saal tumhare saath aur haseen ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tum meri taqat bano—yehi meri zindagi ka sabse sachha sahara hai.",
-"Har pal tumhara haath mere haath mein rahe—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari yaadon se shuru ho—yehi meri zindagi ka sabse meetha ehsaas hai.",
-"Har shaam tumhare saath dhal jaaye—yehi meri khushiyon ka sabse haseen rang hai.",
-"Har pal tum meri aadat ban jao—yehi meri mohabbat ka sabse gehra asar hai.",
-"Har din tumhari baaton mein kho jaun—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har lamha tumhari hansi se mehka rahe—yehi meri duniya ka sabse khoobsurat noor hai.",
-"Har waqt tum mere dil ke kareeb raho—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumse hi sajta rahe—yehi meri neendon ka sabse haseen raaz hai.",
-"Har din tumhare saath ek nayi khushi laaye—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari mohabbat se juda rahe—yehi meri chahat ka sabse sachha roop hai.",
-"Har pal tum meri duniya bano—yehi meri zindagi ka sabse khoobsurat sapna hai.",
-"Har raat tumhari yaadon mein guzar jaaye—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari muskaan se roshan rahe—yehi meri khushiyon ka sabse bada wajah hai.",
-"Har saans tumhare saath chalti rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri taqat bano—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina adhoora lage—yehi meri mohabbat ka sabse gehra sach hai.",
-"Har din tumhari baahon mein sukoon mile—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon mein basi raho—yehi meri chahat ka sabse khoobsurat rang hai.",
-"Har lamha tumhari yaadon se saja rahe—yehi meri zindagi ka sabse haseen ehsaas hai.",
-"Har rishte se badhkar tumhara pyaar ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari awaaz sunne ko mile—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare saath mehsoos ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon mein raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek naya armaan jage—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton se sajti rahe—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein dhalta rahe—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ka hissa bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath mehsoos ho—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath aur haseen ban jaaye—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri khushi ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeena ho—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari duaon se roshan ho—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhare saath sukoon se dhal jaaye—yehi meri khushiyon ka sabse haseen rang hai.",
-"Har pal tum meri aadat ban kar dil mein basi raho—yehi meri mohabbat ka sabse sachha asar hai.",
-"Har din tumhari nazron mein apna jahaan dikhai de—yehi meri zindagi ka sabse khoobsurat sapna hai.",
-"Har lamha tumhari hansi se mehka rahe—yehi meri duniya ka sabse pyaara noor hai.",
-"Har waqt tum mere paas hone ka ehsaas do—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari tasveer se saja rahe—yehi meri neendon ka sabse haseen raaz hai.",
-"Har din tumhare saath ek nayi umeed jagaye—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari mohabbat se rangeen ho—yehi meri chahat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka markaz bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari yaadon mein khushbu bankar basi rahe—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari baaton se dil ko sukoon mile—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare naam se judi rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri himmat ban kar saath raho—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina adhoora mehsoos ho—yehi meri mohabbat ka sabse sachha rang hai.",
-"Har din tumhari baahon mein apni duniya mil jaaye—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon ka hissa bano—yehi meri chahat ka sabse gehra raaz hai.",
-"Har lamha tumhari yaadon se roshan ho—yehi meri zindagi ka sabse haseen ehsaas hai.",
-"Har rishte se badhkar tumhari wafaa ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari awaaz mere din ko poora kare—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare saath mehsoos ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon mein shaamil raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek nayi kahani likhun—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton se dil mehka rahe—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein dooba rahe—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ka sabse khaas hissa bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri taqat bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath nayi khushiyan laaye—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri muskaan ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeena naseeb ho—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari nazar se roshan ho—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhare saath sukoon se guzar jaaye—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri dhadkan ban kar saath chalo—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari baaton mein nayi mithaas mile—yehi meri zindagi ka sabse khoobsurat safar hai.",
-"Har lamha tumhari hansi meri duniya sajaaye—yehi meri khushiyon ka sabse pyaara rang hai.",
-"Har waqt tum meri rooh ke kareeb raho—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari yaadon se mehka rahe—yehi meri neendon ka sabse haseen ehsaas hai.",
-"Har din tumhare saath nayi umeedein jagti rahein—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari chahat se roshan ho—yehi meri mohabbat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka sabse khaas hissa bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari yaadon mein sukoon mile—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari muskaan meri roshni bane—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare saath chalti rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri himmat bankar khadi raho—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina dil adhoora lage—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein sukoon paun—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon mein basi raho—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon se saja rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhara saath ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari awaaz dil ko sukoon de—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare naam ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon ka hissa raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek naya armaan jage—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton se roshan rahe—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein rangeen ho—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ki sabse badi khushi bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri taqat bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath nayi yaadein laaye—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri hansi ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeene ka mauka mile—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari aankhon ki roshni se jagun—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhari baaton ki garmahat mein dhal jaaye—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri rooh ka hissa ban kar saath raho—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari muskaan meri thakan mita de—yehi meri zindagi ka sabse khoobsurat sukoon hai.",
-"Har lamha tumhari hansi meri duniya ko mehkaaye—yehi meri khushiyon ka sabse pyaara rang hai.",
-"Har waqt tum meri nazron ke saamne raho—yehi meri zindagi ka sabse bada armaan hai.",
-"Har khwab tumhari baahon mein poora ho—yehi meri neendon ka sabse haseen ehsaas hai.",
-"Har din tumhare saath ek nayi raah mile—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har ehsaas tumhari mohabbat se mehka rahe—yehi meri chahat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka sabse anmol hissa bano—yehi meri zindagi ka sabse bada inaam hai.",
-"Har raat tumhari yaadon ka chaand chamakta rahe—yehi meri neendon ka sabse pyaara noor hai.",
-"Har din tumhari awaaz meri rooh ko sukoon de—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare naam likhi ho—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri himmat bankar saath do—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina dil bechain rahe—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein apna jahaan mil jaaye—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon ka sur bano—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon ka rang chadha rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhari mohabbat ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari hansi mere dil ko roshan kare—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhari muskaan se judi rahe—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon mein basi raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek naya khwab sajaun—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton ki roshni mein dhal jaaye—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat ka rang liye rahe—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ki sabse badi dua bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri himmat ban jaaye—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath aur yaadein judti rahein—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri dhadkan ki muskaan bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeene ka ehsaas rahe—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari dua se shuru ho—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhari baahon mein sukoon paaye—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri rooh mein utar jao—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari muskaan meri duniya sajaaye—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har lamha tumhari yaadon se mehka rahe—yehi meri khushiyon ka sabse pyaara ehsaas hai.",
-"Har waqt tum mere kareeb hone ka ehsaas do—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari aankhon mein poora ho—yehi meri neendon ka sabse haseen safar hai.",
-"Har din tumhare saath nayi khushiyan laaye—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari chahat se roshan ho—yehi meri mohabbat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka markaz bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari yaadon mein sukoon mile—yehi meri neendon ka sabse pyaara lamha hai.",
-"Har din tumhari awaaz dil ko chain de—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare naam se judi rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri taqat bankar saath raho—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina dil bechain rahe—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein apni duniya paun—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon ka sur bano—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon se saja rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhara pyaar ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari hansi dil ko roshan kare—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare saath mehsoos ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon mein shaamil raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek nayi umeed jage—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton se roshan ho—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein rang jaaye—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ki sabse badi khushi bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri himmat bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath aur yaadein banun—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri muskaan ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeena naseeb ho—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari hansi se roshan ho—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhari yaadon mein sukoon mile—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri rooh ka sukoon ban jao—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari baaton mein mithaas ghul jaaye—yehi meri zindagi ka sabse khoobsurat safar hai.",
-"Har lamha tumhari muskaan meri duniya sajaaye—yehi meri khushiyon ka sabse pyaara rang hai.",
-"Har waqt tum mere dil ke kareeb raho—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari baahon mein poora ho—yehi meri neendon ka sabse haseen ehsaas hai.",
-"Har din tumhare saath nayi khushiyan judti rahein—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari mohabbat se mehka rahe—yehi meri chahat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka noor bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari baaton mein dil kho jaaye—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari awaaz dil ko chain de—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare naam se chalti rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri himmat ban kar saath chalo—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina dil adhoora lage—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein sukoon mile—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon mein basi raho—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon se mehka rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhara pyaar ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari hansi meri roshni bane—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare saath mehsoos ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon ka hissa raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek naya khwab sajaun—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari yaadon se roshan ho—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein rang jaaye—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ki sabse badi khushi bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri taqat bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath nayi yaadein judti rahein—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri muskaan ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeene ka mauka mile—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari khushboo se mehka kare—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhari baahon mein dhal jaaye—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri rooh ka chain ban jao—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari nazron mein apni duniya dikhe—yehi meri zindagi ka sabse khoobsurat safar hai.",
-"Har lamha tumhari hansi se dil roshan rahe—yehi meri khushiyon ka sabse pyaara rang hai.",
-"Har waqt tum meri dhadkan ke kareeb raho—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari baahon mein sajta rahe—yehi meri neendon ka sabse haseen ehsaas hai.",
-"Har din tumhare saath nayi umeedein khilti rahein—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari mohabbat se rangeen ho—yehi meri chahat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ki roshni bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari yaadon mein dil sukoon paaye—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari awaaz se dil khush ho—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare naam se judi rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri himmat ban kar saath chalo—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina dil adhoora lage—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein apna jahaan paun—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon ka sur bano—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon se saja rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhara saath ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari hansi meri roshni bane—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare saath mehsoos ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon mein shaamil raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek nayi kahani likhun—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton se dil mehka rahe—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein rang jaaye—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ki sabse badi khushi bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri taqat bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath nayi yaadein banti rahein—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri muskaan ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeena naseeb ho—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari aankhon ki chamak se roshan ho—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhari baaton ki garmahat mein dhal jaaye—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri rooh ka sukoon bankar saath raho—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari muskaan meri duniya ko sajaaye—yehi meri zindagi ka sabse khoobsurat safar hai.",
-"Har lamha tumhari hansi se dil mehka rahe—yehi meri khushiyon ka sabse pyaara rang hai.",
-"Har waqt tum meri dhadkan ke paas raho—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari yaadon se sajta rahe—yehi meri neendon ka sabse haseen ehsaas hai.",
-"Har din tumhare saath nayi umeedein khilti rahein—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari chahat se roshan ho—yehi meri mohabbat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka noor bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari yaadon mein dil ko sukoon mile—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari awaaz mere dil ko chain de—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare naam se chalti rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri himmat bankar saath chalo—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina dil adhoora lage—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein apni duniya paun—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon ka sur bano—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon se saja rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhara saath ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari hansi meri roshni bane—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare saath mehsoos ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon mein shaamil raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek nayi kahani likhun—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton se dil mehka rahe—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein rang jaaye—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ki sabse badi khushi bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri taqat bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath nayi yaadein banti rahein—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri muskaan ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeena naseeb ho—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari yaadon ki roshni se jagun—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhari baaton ki chaadar mein lipat jaaye—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri rooh mein mehsoos ho—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari nazron mein apni duniya basaaun—yehi meri zindagi ka sabse khoobsurat safar hai.",
-"Har lamha tumhari hansi se dil mehka rahe—yehi meri khushiyon ka sabse pyaara rang hai.",
-"Har waqt tum meri dhadkanon ke paas raho—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari baahon mein apni manzil paaye—yehi meri neendon ka sabse haseen ehsaas hai.",
-"Har din tumhare saath nayi umeedein janam lein—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari mohabbat se roshan rahe—yehi meri chahat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka ujala bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari yaadon mein sukoon mile—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari awaaz dil ko chain de—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare naam se judi rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri himmat ban kar saath chalo—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina dil adhoora lage—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein apni duniya paun—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon ka sur bano—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon se saja rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhara saath ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari hansi meri roshni bane—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare saath mehsoos ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon mein shaamil raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek nayi kahani likhun—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton se dil mehka rahe—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein rang jaaye—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ki sabse badi khushi bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri taqat bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath nayi yaadein banti rahein—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri muskaan ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeena naseeb ho—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari duaon ki roshni se jagun—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhari baaton ki mehak mein dhal jaaye—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri rooh ka sukoon ban kar saath raho—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari nazron mein apna jahaan basaun—yehi meri zindagi ka sabse khoobsurat safar hai.",
-"Har lamha tumhari hansi meri duniya ko roshan kare—yehi meri khushiyon ka sabse pyaara rang hai.",
-"Har waqt tum meri dhadkanon ke kareeb raho—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari baahon mein apni manzil paaye—yehi meri neendon ka sabse haseen ehsaas hai.",
-"Har din tumhare saath nayi umeedein khilti rahein—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari mohabbat se mehka rahe—yehi meri chahat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka noor bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari yaadon mein sukoon mile—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari awaaz dil ko chain de—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare naam se judi rahe—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri himmat ban kar saath chalo—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina dil adhoora lage—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein apni duniya paun—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon ka sur bano—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon se saja rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhara saath ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari hansi meri roshni bane—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhare saath mehsoos ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon mein shaamil raho—yehi meri ibadat ka sabse khaas ehsaas hai.",
-"Har din tumhare saath ek nayi kahani likhun—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton se dil mehka rahe—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat mein rang jaaye—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ki sabse badi khushi bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri taqat bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath nayi yaadein banti rahein—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri muskaan ki wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeena naseeb ho—yehi meri zindagi ka sabse khoobsurat anjaam hai.",
-"Har subah tumhari yaadon ka noor jagaye—yehi meri zindagi ka sabse pyaara ehsaas hai.",
-"Har shaam tumhari baaton ki garmahat se bhar jaaye—yehi meri khushiyon ka sabse haseen lamha hai.",
-"Har pal tum meri rooh ka sukoon ban kar thehar jao—yehi meri mohabbat ka sabse gehra raaz hai.",
-"Har din tumhari aankhon mein apna jahaan dikhai de—yehi meri zindagi ka sabse khoobsurat safar hai.",
-"Har lamha tumhari hansi se dil gulzaar ho—yehi meri khushiyon ka sabse pyaara rang hai.",
-"Har waqt tum meri dhadkanon ki lehra bano—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har khwab tumhari baahon ki panaah mein poora ho—yehi meri neendon ka sabse haseen ehsaas hai.",
-"Har din tumhare saath nayi umeed ka diya jale—yehi meri zindagi ka sabse pyaara tohfa hai.",
-"Har ehsaas tumhari chahat ki roshni se chamke—yehi meri mohabbat ka sabse khoobsurat rang hai.",
-"Har pal tum meri duniya ka sabse roshan sitaara bano—yehi meri zindagi ka sabse bada armaan hai.",
-"Har raat tumhari yaadon ki chaandni se mehke—yehi meri neendon ka sabse pyaara safar hai.",
-"Har din tumhari awaaz se dil ko sukoon mile—yehi meri khushiyon ka sabse bada sabab hai.",
-"Har saans tumhare zikr se mehka kare—yehi meri zindagi ka sabse gehra ehsaas hai.",
-"Har mod par tum meri umeed bankar khade raho—yehi meri zindagi ka sabse bada sahara hai.",
-"Har pal tumhare bina sab kuch adhoora lage—yehi meri mohabbat ka sabse sachha izhaar hai.",
-"Har din tumhari baahon mein apni duniya samet loon—yehi meri zindagi ka sabse pyaara lamha hai.",
-"Har waqt tum meri dhadkanon ki dhun bano—yehi meri chahat ka sabse gehra ehsaas hai.",
-"Har lamha tumhari yaadon ka rang liye rahe—yehi meri zindagi ka sabse haseen safar hai.",
-"Har rishte se badhkar tumhara ehsaas ho—yehi meri zindagi ka sabse bada vardaan hai.",
-"Har din tumhari hansi meri roshni ban jaaye—yehi meri khushiyon ka sabse pyaara raaz hai.",
-"Har khushi tumhari muskaan se shuru ho—yehi meri zindagi ka sabse khoobsurat hissa hai.",
-"Har pal tum meri duaon ka sabse khaas hissa raho—yehi meri ibadat ka sabse gehra ehsaas hai.",
-"Har din tumhare saath ek nayi umeed jagti rahe—yehi meri zindagi ka sabse pyaara safar hai.",
-"Har raat tumhari baaton ki roshni mein dhal jaaye—yehi meri neendon ka sabse haseen noor hai.",
-"Har lamha tumhari mohabbat ka rang gehra hota rahe—yehi meri zindagi ka sabse khoobsurat rang hai.",
-"Har din tum meri zindagi ka sabse haseen faisla bano—yehi meri chahat ka sabse bada iraada hai.",
-"Har pal tumhara saath meri taqat ka sabab bane—yehi meri zindagi ka sabse bada sukoon hai.",
-"Har saal tumhare saath nayi yaadon ka silsila bane—yehi meri zindagi ka sabse pyaara sapna hai.",
-"Har din tum meri muskaan ka wajah bano—yehi meri zindagi ka sabse sachha ehsaas hai.",
-"Har lamha tumhare saath jeena meri kismat ban jaaye—yehi meri zindagi ka sabse khoobsurat anjaam hai."
+
+"Year 1 ❤️\nThe day you entered my life, love stopped feeling like a word and started feeling like home.",
+
+"Year 2 ❤️\nSomewhere between endless conversations and silent understandings, you became my favorite part of every day.",
+
+"Year 3 ❤️\nYour presence slowly turned my chaos into peace, and my ordinary moments into beautiful memories.",
+
+"Year 4 ❤️\nLoving you no longer felt like a choice; it became the most natural part of my existence.",
+
+"Year 5 ❤️\nEven after all this time, your smile still has the power to calm storms inside my heart.",
+
+"Year 6 ❤️\nWe grew together through every happiness, every fight, every fear—and somehow our love only became stronger.",
+
+"Year 7 ❤️\nWith you beside me, forever stopped sounding impossible and started feeling real.",
+
+"Year 8 ❤️\nEight years later, I still look at you with the same wonder—only now, my love carries deeper roots, softer feelings, and a lifetime of certainty."
+
 ];
+
+function isBirthdayUnlocked() {
+
+    const now = new Date();
+
+    // Unlocks exactly on 14 May 12:00 AM
+    const unlockDate = new Date(now.getFullYear(), 4, 14, 0, 0, 0);
+
+    return now.getTime() >= unlockDate.getTime();
+}
+
+function startExperience() {
+
+    const card = document.getElementById("card");
+
+    if (!isBirthdayUnlocked()) {
+
+        card.innerHTML = `
+            <h2>Not Yet ❤️</h2>
+
+            <p>
+                This little piece of my heart unlocks on <br><br>
+                <strong>14 May • 12:00 AM</strong> ✨
+            </p>
+        `;
+
+        return;
+    }
+
+    nextStep();
+}
 
 function nextStep() {
     step++;
@@ -528,7 +223,7 @@ function nextStep() {
     if (step < shayari.length) {
         card.innerHTML = `
             <h2>For You Chakli ❤️</h2>
-            <h3>💌 Day ${step + 1} of Love</h3>
+            <h3>💖 Year ${step + 1} Together</h3>
             <p>${shayari[step]}</p>
             <button class="next" onclick="nextStep()">Next 💌</button>
         `;
@@ -558,7 +253,6 @@ function nextStep() {
     }
 }
 
-// 🔐 Netlify
 async function checkPasscode() {
     const input = document.getElementById("passcode").value;
     const error = document.getElementById("error");
@@ -579,7 +273,6 @@ async function checkPasscode() {
     }
 }
 
-// ✍️ Typing effect + 💓 heartbeat
 function revealImage() {
     const img = document.getElementById("loveImage");
     img.classList.remove("blur");
@@ -596,15 +289,15 @@ function revealImage() {
             setTimeout(type, 50);
         }
     }
+
     type();
 }
 
-// 🌹❤️ Romantic Falling Particles (enhanced)
 const items = ["🌹","🌷","🌸","❤️","💕","💖","✨"];
 
 setInterval(() => {
 
-    for (let i = 0; i < 2; i++) { // reduced from 4 → 2
+    for (let i = 0; i < 2; i++) {
 
         const p = document.createElement("div");
         p.className = "petal";
@@ -619,9 +312,10 @@ setInterval(() => {
         setTimeout(() => p.remove(), 7000);
     }
 
-}, 600); // slower spawn (was 200)
+}, 600);
 
 </script>
 
 </body>
 </html>
+```
