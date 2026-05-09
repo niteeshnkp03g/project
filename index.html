@@ -1,315 +1,700 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> 💖 For Chakli 💖 </title>
+
+<title>💖 For Chakli 💖</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: 'Georgia', serif;
-    background: linear-gradient(135deg, #2b2e4a, #e84545);
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    overflow: hidden;
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.card {
-    width: 90%;
-    max-width: 420px;
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(255,255,255,0.08);
-    backdrop-filter: blur(12px);
-    text-align: center;
-    box-shadow: 0 0 40px rgba(0,0,0,0.4);
+body{
+    font-family:'Georgia',serif;
+    background:linear-gradient(135deg,#2b2e4a,#e84545);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+    padding:20px;
+    position:relative;
 }
 
-p {
-    font-size: 18px;
-    line-height: 1.7;
-    background: rgba(255,255,255,0.1);
-    padding: 15px;
-    border-radius: 12px;
+.card{
+    width:95%;
+    max-width:1100px;
+    padding:35px;
+    border-radius:28px;
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(14px);
+    text-align:center;
+    box-shadow:0 0 40px rgba(0,0,0,0.4);
+    position:relative;
+    z-index:5;
+    overflow:hidden;
 }
 
-h3 {
-    margin: 10px 0;
-    color: #ffd1dc;
+h2{
+    margin-bottom:10px;
+    font-size:42px;
 }
 
-.next {
-    background: white;
-    color: #333;
-    padding:10px 18px;
+h3{
+    color:#ffd1dc;
+    margin-bottom:25px;
+    font-size:30px;
+}
+
+.memory-container{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:55px;
+    margin-top:20px;
+}
+
+.image-card{
+    position:relative;
+    width:340px;
+    min-width:340px;
+    height:480px;
+    padding:10px;
+    border-radius:32px;
+    overflow:hidden;
+    animation:floatCard 3s ease-in-out infinite;
+}
+
+.image-card::before{
+    content:"";
+    position:absolute;
+    inset:-3px;
+    border-radius:32px;
+    background:linear-gradient(
+        45deg,
+        #ff6b81,
+        #ff8fab,
+        #ffd6e0,
+        #ff6b81
+    );
+    background-size:300% 300%;
+    animation:borderGlow 4s linear infinite;
+    z-index:0;
+}
+
+.image-card::after{
+    content:"";
+    position:absolute;
+    inset:5px;
+    background:#6b3f50;
+    border-radius:25px;
+    z-index:1;
+}
+
+.memory-image{
+    position:relative;
+    z-index:2;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:24px;
+    animation:imagePulse 2.8s ease-in-out infinite;
+}
+
+.quote-card{
+    flex:1;
+    min-height:480px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:40px;
+    border-radius:30px;
+    background:rgba(255,255,255,0.12);
+    position:relative;
+    overflow:hidden;
+    animation:quoteGlow 3s ease-in-out infinite;
+    text-align:left;
+}
+
+.quote-card::before{
+    content:"💖";
+    position:absolute;
+    top:12px;
+    right:18px;
+    font-size:30px;
+    animation:blink 1.4s infinite;
+}
+
+.quote-text{
+    white-space:pre-line;
+    line-height:2;
+    font-size:25px;
+}
+
+.next{
+    background:white;
+    color:#333;
+    padding:14px 26px;
     border:none;
-    border-radius:8px;
+    border-radius:12px;
     cursor:pointer;
-    margin-top: 10px;
+    margin-top:28px;
+    font-size:17px;
+    transition:0.3s;
 }
 
-img {
-    width: 100%;
-    border-radius: 15px;
-    margin-top: 10px;
+.next:hover{
+    transform:scale(1.08);
 }
 
-.blur {
-    filter: blur(20px) brightness(0.7);
-    transform: scale(1.05);
-    transition: all 2s ease;
+.pass-box{
+    background:rgba(255,255,255,0.12);
+    padding:30px;
+    border-radius:25px;
 }
 
-.clear {
-    filter: blur(0) brightness(1);
-    transform: scale(1);
+#passcode{
+    width:80%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    outline:none;
+    text-align:center;
+    font-size:18px;
+    margin-bottom:18px;
 }
 
-.heartbeat {
-    animation: beat 1s infinite;
+.unlock-btn{
+    background:linear-gradient(135deg,#ff758c,#ff7eb3);
+    border:none;
+    padding:14px 28px;
+    border-radius:30px;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
 }
 
-@keyframes beat {
-    0%,100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+#error{
+    margin-top:10px;
+    color:#ffd1dc;
 }
 
-.petal {
-    position: absolute;
-    pointer-events: none;
-    animation: fall linear infinite;
+.blur{
+    filter:blur(20px) brightness(0.7);
+    transform:scale(1.05);
+    transition:all 2s ease;
 }
 
-.title {
-    font-size: 28px;
-    margin-bottom: 15px;
-    color: #fff;
+.clear{
+    filter:blur(0);
+    transform:scale(1);
 }
 
-.pass-box {
-    background: rgba(255,255,255,0.12);
-    padding: 20px;
-    border-radius: 15px;
-    backdrop-filter: blur(10px);
+.heartbeat{
+    animation:beat 1s infinite;
 }
 
-.pass-text {
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-#passcode {
-    width: 80%;
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    text-align: center;
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.unlock-btn {
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    border: none;
-    padding: 12px 25px;
-    border-radius: 25px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.unlock-btn:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(255, 118, 150, 0.6);
-}
-
-#error {
-    margin-top: 10px;
-    color: #ffd1dc;
-}
-
-@keyframes fall {
-    0% {
-        transform: translateY(-10vh) translateX(0);
-        opacity: 1;
+@keyframes beat{
+    0%,100%{
+        transform:scale(1);
     }
-    50% {
-        transform: translateY(50vh) translateX(20px);
-    }
-    100% {
-        transform: translateY(110vh) translateX(-20px);
-        opacity: 0;
+    50%{
+        transform:scale(1.03);
     }
 }
+
+@keyframes imagePulse{
+    0%,100%{
+        transform:scale(1);
+    }
+    50%{
+        transform:scale(1.04);
+    }
+}
+
+@keyframes borderGlow{
+    0%{
+        background-position:0% 50%;
+    }
+    100%{
+        background-position:100% 50%;
+    }
+}
+
+@keyframes floatCard{
+    0%,100%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-8px);
+    }
+}
+
+@keyframes quoteGlow{
+    0%,100%{
+        box-shadow:0 0 15px rgba(255,255,255,0.1);
+    }
+    50%{
+        box-shadow:0 0 35px rgba(255,192,203,0.4);
+    }
+}
+
+@keyframes blink{
+    0%,100%{
+        opacity:1;
+    }
+    50%{
+        opacity:0.3;
+    }
+}
+
+/* FLOATING SIDE EMOJIS */
+
+.side-emoji{
+    position:absolute;
+    font-size:28px;
+    animation:sideFall linear infinite;
+    z-index:1;
+    pointer-events:none;
+}
+
+@keyframes sideFall{
+
+    0%{
+        transform:translateY(-10vh) scale(0.8);
+        opacity:0;
+    }
+
+    15%{
+        opacity:1;
+    }
+
+    50%{
+        transform:translateY(50vh) translateX(10px) scale(1);
+    }
+
+    100%{
+        transform:translateY(110vh) translateX(-10px) scale(0.8);
+        opacity:0;
+    }
+}
+
+@media(max-width:900px){
+
+    body{
+        padding:15px;
+        align-items:flex-start;
+    }
+
+    .card{
+        margin-top:20px;
+        padding:25px;
+    }
+
+    .memory-container{
+        flex-direction:column;
+        gap:35px;
+    }
+
+    .image-card{
+        width:100%;
+        max-width:320px;
+        min-width:auto;
+        height:430px;
+    }
+
+    .quote-card{
+        width:100%;
+        min-height:auto;
+        text-align:center;
+        padding:28px;
+    }
+
+    .quote-text{
+        font-size:20px;
+        line-height:1.8;
+    }
+
+    h2{
+        font-size:30px;
+    }
+
+    h3{
+        font-size:24px;
+    }
+}
+
 </style>
 </head>
 
 <body>
 
 <div class="card" id="card">
-    <h2> 💖 Hey Chakli 💖 </h2>
-    <p>I want to show you something special...</p>
-    <button class="next" onclick="startExperience()">Start 💌</button>
+
+    <h2>💖 Hey Chakli 💖</h2>
+
+    <div class="quote-card" style="min-height:auto; text-align:center;">
+
+        <div class="quote-text">
+            I want to show you something special... ❤️
+        </div>
+
+    </div>
+
+    <button class="next" onclick="nextStep()">
+        Start 💌
+    </button>
+
 </div>
 
 <script>
 
-let step = -1;
+let step=-1;
 
-const shayari = [
+const memories=[
 
-"Year 1 💖\nThe day you entered my life, love stopped feeling like a word and started feeling like home.",
+{
+image:"./images/1.jpg",
+title:"Year 1 💖",
+text:
+`The day you entered my life,
+love stopped feeling like a dream
+and started feeling real.
 
-"Year 2 💖\nSomewhere between endless conversations and silent understandings, you became my favorite part of every day.",
+Without even realizing it,
+my heart had already
+started calling you home.`
+},
 
-"Year 3 💖\nYour presence slowly turned my chaos into peace, and my ordinary moments into beautiful memories.",
+{
+image:"./images/2.jpg",
+title:"Year 2 💖",
+text:
+`Between endless conversations,
+random laughs, silly fights,
+and long nights,
 
-"Year 4 💖\nLoving you no longer felt like a choice; it became the most natural part of my existence.",
+you slowly became the person
+I could never stay away from.`
+},
 
-"Year 5 💖\nEven after all this time, your smile still has the power to calm storms inside my heart.",
+{
+image:"./images/3.png",
+title:"Year 3 💖",
+text:
+`There were moments
+when misunderstandings
+created distance.
 
-"Year 6 💖\nWe grew together through every happiness, every fight, every fear—and somehow our love only became stronger.",
+But somehow,
+our hearts still searched
+for each other every time.`
+},
 
-"Year 7 💖\nWith you beside me, forever stopped sounding impossible and started feeling real.",
+{
+image:"./images/4.jpg",
+title:"Year 4 💖",
+text:
+`We learned that love
+is not about perfect days,
 
-"Year 8 💖\nEight years later, I still look at you with the same wonder—only now, my love carries deeper roots, softer feelings, and a lifetime of certainty."
+but about staying together
+during difficult moments.`
+},
+
+{
+image:"./images/5.jpg",
+title:"Year 5 💖",
+text:
+`Your smile became my peace.
+Your presence became my comfort.
+
+Even during storms,
+we kept choosing
+each other again and again.`
+},
+
+{
+image:"./images/6.jpg",
+title:"Year 6 💖",
+text:
+`We faced emotional nights,
+silent moments,
+pain, and fears.
+
+Yet somehow,
+our love survived everything.`
+},
+
+{
+image:"./images/7.jpg",
+title:"Year 7 💖",
+text:
+`Forever stopped sounding impossible
+because every future
+I imagined
+
+always had you beside me,
+holding my hand.`
+},
+
+{
+image:"./images/8.jpg",
+title:"Year 8 💖",
+text:
+`Eight years later,
+this love carries patience,
+healing, loyalty, and strength.
+
+We never stopped
+choosing each other.`
+}
 
 ];
 
-function isBirthdayUnlocked() {
+function nextStep(){
 
-    const now = new Date();
-
-    // Unlocks exactly on 14 May 12:00 AM
-    const unlockDate = new Date(now.getFullYear(), 4, 14, 0, 0, 0);
-
-    return now.getTime() >= unlockDate.getTime();
-}
-
-function startExperience() {
-
-    const card = document.getElementById("card");
-
-    if (!isBirthdayUnlocked()) {
-
-        card.innerHTML = `
-            <h2> 💖 Not Yet 💖 </h2>
-
-            <p>
-                This little piece of my heart unlocks on <br><br>
-                <strong> 14 May 💖 12:00 AM </strong> ✨
-            </p>
-        `;
-
-        return;
-    }
-
-    nextStep();
-}
-
-function nextStep() {
     step++;
-    const card = document.getElementById("card");
 
-    if (step < shayari.length) {
-        card.innerHTML = `
-            <h2> 💖 For You Chakli 💖 </h2>
-            <h3> 💖 Year ${step + 1} Together 💖 </h3>
-            <p>${shayari[step]}</p>
-            <button class="next" onclick="nextStep()">Next 💌</button>
+    const card=document.getElementById("card");
+
+    if(step < memories.length){
+
+        card.innerHTML=`
+
+            <h2>💖 For You Chakli 💖</h2>
+
+            <h3>${memories[step].title}</h3>
+
+            <div class="memory-container">
+
+                <div class="image-card">
+
+                    <img
+                        src="${memories[step].image}"
+                        class="memory-image clear"
+                    >
+
+                </div>
+
+                <div class="quote-card">
+
+                    <div class="quote-text">
+
+${memories[step].text}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <button class="next" onclick="nextStep()">
+                Next 💌
+            </button>
         `;
     }
 
-    else if (step === shayari.length) {
-        card.innerHTML = `
-           <h2 class="title"> 💖 One Last Thing 💖 </h2>
+    else if(step === memories.length){
 
-        <div class="pass-box">
-            <p class="pass-text">Enter our Love Passcode 🔐</p>
-            <input type="password" id="passcode" placeholder="••••••">
-            <button class="unlock-btn" onclick="checkPasscode()">Unlock 💕</button>
-            <p id="error"></p>
-        </div>
+        card.innerHTML=`
+
+            <h2>💖 One Last Thing 💖</h2>
+
+            <div class="pass-box">
+
+                <div class="quote-text" style="text-align:center; font-size:22px;">
+                    Enter our Love Passcode 🔐
+                </div>
+
+                <br>
+
+                <input
+                    type="password"
+                    id="passcode"
+                    placeholder="••••••"
+                >
+
+                <br>
+
+                <button
+                    class="unlock-btn"
+                    onclick="checkPasscode()"
+                >
+                    Unlock 💕
+                </button>
+
+                <p id="error"></p>
+
+            </div>
         `;
     }
 
-    else if (step === shayari.length + 1) {
-        card.innerHTML = `
-            <h2> 💖 Our Journey 💖 </h2>
-            <img id="loveImage" src="./photo.jpg" class="blur">
-            <p id="revealText"></p>
+    else if(step === memories.length + 1){
+
+        card.innerHTML=`
+
+            <h2>💖 Forever Us 💖</h2>
+
+            <div class="image-card"
+                 style="margin:auto; width:360px; height:500px;">
+
+                <img
+                    id="loveImage"
+                    src="./images/final.jpg"
+                    class="memory-image blur"
+                >
+
+            </div>
+
+            <div class="quote-card"
+                 style="margin-top:30px; min-height:auto;">
+
+                <div
+                    id="revealText"
+                    class="quote-text"
+                    style="text-align:center;"
+                ></div>
+
+            </div>
+
         `;
 
-        setTimeout(revealImage, 1500);
+        setTimeout(revealImage,1500);
     }
 }
 
-async function checkPasscode() {
-    const input = document.getElementById("passcode").value;
-    const error = document.getElementById("error");
+async function checkPasscode(){
 
-    try {
-        const res = await fetch("/.netlify/functions/verify", {
-            method: "POST",
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify({ passcode: input })
+    const input=document.getElementById("passcode").value;
+
+    const error=document.getElementById("error");
+
+    try{
+
+        const res=await fetch("/.netlify/functions/verify",{
+
+            method:"POST",
+
+            headers:{
+                "Content-Type":"application/json"
+            },
+
+            body:JSON.stringify({
+                passcode:input
+            })
         });
 
-        const data = await res.json();
+        const data=await res.json();
 
-        if (data.success) nextStep();
-        else error.innerText = "Wrong passcode ❤️";
-    } catch {
-        error.innerText = "Error";
+        if(data.success){
+
+            nextStep();
+
+        }else{
+
+            error.innerText="Wrong passcode ❤️";
+        }
+
+    }catch{
+
+        error.innerText="Error";
     }
 }
 
-function revealImage() {
-    const img = document.getElementById("loveImage");
+function revealImage(){
+
+    const img=document.getElementById("loveImage");
+
     img.classList.remove("blur");
-    img.classList.add("clear", "heartbeat");
 
-    const text = " 💖 Every moment with you is magic 💖 ";
-    let i = 0;
-    const el = document.getElementById("revealText");
+    img.classList.add("clear","heartbeat");
 
-    function type() {
-        if (i < text.length) {
+    const text=
+
+`From strangers to soulmates,
+from late-night talks to silent understanding,
+from fights to healing,
+from holding hands to holding hearts,
+we grew through every season together.
+
+Eight years later,
+my safest place is still beside you ❤️`;
+
+    let i=0;
+
+    const el=document.getElementById("revealText");
+
+    function type(){
+
+        if(i < text.length){
+
             el.innerHTML += text.charAt(i);
+
             i++;
-            setTimeout(type, 50);
+
+            setTimeout(type,40);
         }
     }
 
     type();
 }
 
-const items = ["🌹","🌷","🌸","❤️","💕","💖","✨"];
+/* SIDE EMOJIS */
 
-setInterval(() => {
+const items=[
+"🌹","🌷","🌸",
+"❤️","💕","💖",
+"✨","💘","🥰"
+];
 
-    for (let i = 0; i < 2; i++) {
+setInterval(()=>{
 
-        const p = document.createElement("div");
-        p.className = "petal";
+    for(let i=0;i<4;i++){
 
-        p.innerHTML = items[Math.floor(Math.random() * items.length)];
-        p.style.left = Math.random() * 100 + "vw";
-        p.style.fontSize = (Math.random() * 25 + 12) + "px";
-        p.style.animationDuration = (Math.random() * 3 + 4) + "s";
+        const p=document.createElement("div");
+
+        p.className="side-emoji";
+
+        p.innerHTML=
+            items[Math.floor(Math.random()*items.length)];
+
+        /* LEFT OR RIGHT */
+
+        const side=Math.random() > 0.5;
+
+        if(side){
+
+            p.style.left=
+                (Math.random()*12)+"vw";
+
+        }else{
+
+            p.style.right=
+                (Math.random()*12)+"vw";
+        }
+
+        p.style.top="-10vh";
+
+        p.style.fontSize=
+            (Math.random()*18+20)+"px";
+
+        p.style.animationDuration=
+            (Math.random()*4+5)+"s";
 
         document.body.appendChild(p);
 
-        setTimeout(() => p.remove(), 7000);
+        setTimeout(()=>p.remove(),9000);
     }
 
-}, 600);
+},700);
 
 </script>
 
