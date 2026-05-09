@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>For Chakli ❤️</title>
+<title> 💖 For Chakli 💖 </title>
 
 <style>
 body {
@@ -153,7 +153,7 @@ img {
 <body>
 
 <div class="card" id="card">
-    <h2>Hey Chakli ❤️</h2>
+    <h2> 💖 Hey Chakli 💖 </h2>
     <p>I want to show you something special...</p>
     <button class="next" onclick="startExperience()">Start 💌</button>
 </div>
@@ -164,21 +164,21 @@ let step = -1;
 
 const shayari = [
 
-"Year 1 ❤️\nThe day you entered my life, love stopped feeling like a word and started feeling like home.",
+"Year 1 💖\nThe day you entered my life, love stopped feeling like a word and started feeling like home.",
 
-"Year 2 ❤️\nSomewhere between endless conversations and silent understandings, you became my favorite part of every day.",
+"Year 2 💖\nSomewhere between endless conversations and silent understandings, you became my favorite part of every day.",
 
-"Year 3 ❤️\nYour presence slowly turned my chaos into peace, and my ordinary moments into beautiful memories.",
+"Year 3 💖\nYour presence slowly turned my chaos into peace, and my ordinary moments into beautiful memories.",
 
-"Year 4 ❤️\nLoving you no longer felt like a choice; it became the most natural part of my existence.",
+"Year 4 💖\nLoving you no longer felt like a choice; it became the most natural part of my existence.",
 
-"Year 5 ❤️\nEven after all this time, your smile still has the power to calm storms inside my heart.",
+"Year 5 💖\nEven after all this time, your smile still has the power to calm storms inside my heart.",
 
-"Year 6 ❤️\nWe grew together through every happiness, every fight, every fear—and somehow our love only became stronger.",
+"Year 6 💖\nWe grew together through every happiness, every fight, every fear—and somehow our love only became stronger.",
 
-"Year 7 ❤️\nWith you beside me, forever stopped sounding impossible and started feeling real.",
+"Year 7 💖\nWith you beside me, forever stopped sounding impossible and started feeling real.",
 
-"Year 8 ❤️\nEight years later, I still look at you with the same wonder—only now, my love carries deeper roots, softer feelings, and a lifetime of certainty."
+"Year 8 💖\nEight years later, I still look at you with the same wonder—only now, my love carries deeper roots, softer feelings, and a lifetime of certainty."
 
 ];
 
@@ -199,11 +199,11 @@ function startExperience() {
     if (!isBirthdayUnlocked()) {
 
         card.innerHTML = `
-            <h2>Not Yet ❤️</h2>
+            <h2> 💖 Not Yet 💖 </h2>
 
             <p>
                 This little piece of my heart unlocks on <br><br>
-                <strong>14 May • 12:00 AM</strong> ✨
+                <strong> 14 May 💖 12:00 AM </strong> ✨
             </p>
         `;
 
@@ -219,8 +219,8 @@ function nextStep() {
 
     if (step < shayari.length) {
         card.innerHTML = `
-            <h2>For You Chakli ❤️</h2>
-            <h3>💖 Year ${step + 1} Together</h3>
+            <h2> 💖 For You Chakli 💖 </h2>
+            <h3> 💖 Year ${step + 1} Together 💖 </h3>
             <p>${shayari[step]}</p>
             <button class="next" onclick="nextStep()">Next 💌</button>
         `;
@@ -228,7 +228,7 @@ function nextStep() {
 
     else if (step === shayari.length) {
         card.innerHTML = `
-           <h2 class="title">One Last Thing ❤️</h2>
+           <h2 class="title"> 💖 One Last Thing 💖 </h2>
 
         <div class="pass-box">
             <p class="pass-text">Enter our Love Passcode 🔐</p>
@@ -241,7 +241,7 @@ function nextStep() {
 
     else if (step === shayari.length + 1) {
         card.innerHTML = `
-            <h2>Our Journey ❤️</h2>
+            <h2> 💖 Our Journey 💖 </h2>
             <img id="loveImage" src="./photo.jpg" class="blur">
             <p id="revealText"></p>
         `;
@@ -275,7 +275,7 @@ function revealImage() {
     img.classList.remove("blur");
     img.classList.add("clear", "heartbeat");
 
-    const text = "Every moment with you is magic ❤️";
+    const text = " 💖 Every moment with you is magic 💖 ";
     let i = 0;
     const el = document.getElementById("revealText");
 
