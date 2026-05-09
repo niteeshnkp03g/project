@@ -15,6 +15,12 @@
     box-sizing:border-box;
 }
 
+html,
+body{
+    width:100%;
+    overflow-x:hidden;
+}
+
 body{
     font-family:'Georgia',serif;
     background:linear-gradient(135deg,#2b2e4a,#e84545);
@@ -22,61 +28,96 @@ body{
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
-    overflow:hidden;
-    padding:20px;
+    min-height:100vh;
+    padding:14px;
     position:relative;
+    overflow:hidden;
 }
 
+/* MAIN CARD */
+
 .card{
-    width:95%;
-    max-width:1100px;
-    padding:35px;
-    border-radius:28px;
+    width:100%;
+    max-width:980px;
+    padding:24px;
+    border-radius:26px;
     background:rgba(255,255,255,0.08);
     backdrop-filter:blur(14px);
-    text-align:center;
-    box-shadow:0 0 40px rgba(0,0,0,0.4);
+    box-shadow:0 0 35px rgba(0,0,0,0.35);
     position:relative;
     z-index:5;
     overflow:hidden;
+    text-align:center;
 }
 
+/* WELCOME */
+
+.welcome-box{
+    width:100%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+    padding:10px 0;
+}
+
+.welcome-quote{
+    width:100%;
+    max-width:700px;
+    min-height:auto;
+    padding:28px 24px;
+}
+
+.welcome-quote .quote-text{
+    font-size:20px;
+    line-height:1.6;
+    text-align:center;
+}
+
+/* TITLES */
+
 h2{
-    margin-bottom:10px;
-    font-size:42px;
+    font-size:34px;
+    margin-bottom:6px;
 }
 
 h3{
+    font-size:24px;
     color:#ffd1dc;
-    margin-bottom:25px;
-    font-size:30px;
+    margin-bottom:18px;
 }
 
+/* CONTENT */
+
 .memory-container{
+    width:100%;
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:55px;
-    margin-top:20px;
+    gap:24px;
 }
+
+/* IMAGE */
 
 .image-card{
     position:relative;
-    width:340px;
-    min-width:340px;
-    height:480px;
-    padding:10px;
-    border-radius:32px;
+    width:250px;
+    min-width:250px;
+    height:340px;
+    padding:7px;
+    border-radius:26px;
     overflow:hidden;
     animation:floatCard 3s ease-in-out infinite;
+    flex-shrink:0;
 }
 
 .image-card::before{
     content:"";
     position:absolute;
-    inset:-3px;
-    border-radius:32px;
+    inset:-2px;
+    border-radius:26px;
+
     background:linear-gradient(
         45deg,
         #ff6b81,
@@ -84,6 +125,7 @@ h3{
         #ffd6e0,
         #ff6b81
     );
+
     background-size:300% 300%;
     animation:borderGlow 4s linear infinite;
     z-index:0;
@@ -92,9 +134,9 @@ h3{
 .image-card::after{
     content:"";
     position:absolute;
-    inset:5px;
+    inset:4px;
     background:#6b3f50;
-    border-radius:25px;
+    border-radius:20px;
     z-index:1;
 }
 
@@ -104,80 +146,95 @@ h3{
     width:100%;
     height:100%;
     object-fit:cover;
-    border-radius:24px;
+    border-radius:18px;
     animation:imagePulse 2.8s ease-in-out infinite;
 }
 
+/* QUOTES */
+
 .quote-card{
-    flex:1;
-    min-height:480px;
+    width:520px;
+    min-height:280px;
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:40px;
-    border-radius:30px;
+    padding:22px 26px;
+    border-radius:22px;
     background:rgba(255,255,255,0.12);
     position:relative;
     overflow:hidden;
     animation:quoteGlow 3s ease-in-out infinite;
-    text-align:left;
 }
 
 .quote-card::before{
     content:"💖";
     position:absolute;
-    top:12px;
-    right:18px;
-    font-size:30px;
-    animation:blink 1.4s infinite;
+    top:10px;
+    right:14px;
+    font-size:24px;
+    animation:blink 1.5s infinite;
 }
 
 .quote-text{
-    white-space:pre-line;
-    line-height:2;
-    font-size:25px;
+    width:100%;
+    font-size:18px;
+    line-height:1.7;
+    white-space:normal;
+    text-align:center;
+    word-break:break-word;
+    max-width:430px;
+    margin:auto;
 }
 
+/* BUTTON */
+
 .next{
+    margin-top:22px;
     background:white;
     color:#333;
-    padding:14px 26px;
     border:none;
     border-radius:12px;
+    padding:12px 22px;
+    font-size:14px;
     cursor:pointer;
-    margin-top:28px;
-    font-size:17px;
     transition:0.3s;
 }
 
 .next:hover{
-    transform:scale(1.08);
+    transform:scale(1.05);
 }
 
+/* PASSCODE */
+
 .pass-box{
+    width:100%;
+    max-width:420px;
+    margin:auto;
     background:rgba(255,255,255,0.12);
-    padding:30px;
-    border-radius:25px;
+    padding:24px;
+    border-radius:22px;
 }
 
 #passcode{
-    width:80%;
-    padding:14px;
-    border-radius:12px;
+    width:100%;
+    padding:13px;
     border:none;
+    border-radius:12px;
     outline:none;
+    font-size:16px;
     text-align:center;
-    font-size:18px;
-    margin-bottom:18px;
+    margin-top:14px;
 }
 
 .unlock-btn{
+    margin-top:14px;
+    width:100%;
     background:linear-gradient(135deg,#ff758c,#ff7eb3);
     border:none;
-    padding:14px 28px;
-    border-radius:30px;
     color:white;
-    font-size:17px;
+    border-radius:26px;
+    padding:12px;
+    font-size:15px;
     cursor:pointer;
 }
 
@@ -185,6 +242,8 @@ h3{
     margin-top:10px;
     color:#ffd1dc;
 }
+
+/* FINAL */
 
 .blur{
     filter:blur(20px) brightness(0.7);
@@ -201,6 +260,8 @@ h3{
     animation:beat 1s infinite;
 }
 
+/* ANIMATIONS */
+
 @keyframes beat{
     0%,100%{
         transform:scale(1);
@@ -215,7 +276,7 @@ h3{
         transform:scale(1);
     }
     50%{
-        transform:scale(1.04);
+        transform:scale(1.03);
     }
 }
 
@@ -233,16 +294,16 @@ h3{
         transform:translateY(0px);
     }
     50%{
-        transform:translateY(-8px);
+        transform:translateY(-6px);
     }
 }
 
 @keyframes quoteGlow{
     0%,100%{
-        box-shadow:0 0 15px rgba(255,255,255,0.1);
+        box-shadow:0 0 18px rgba(255,255,255,0.08);
     }
     50%{
-        box-shadow:0 0 35px rgba(255,192,203,0.4);
+        box-shadow:0 0 28px rgba(255,192,203,0.28);
     }
 }
 
@@ -255,14 +316,13 @@ h3{
     }
 }
 
-/* FLOATING SIDE EMOJIS */
+/* EMOJIS */
 
 .side-emoji{
     position:absolute;
-    font-size:28px;
-    animation:sideFall linear infinite;
     z-index:1;
     pointer-events:none;
+    animation:sideFall linear infinite;
 }
 
 @keyframes sideFall{
@@ -277,57 +337,103 @@ h3{
     }
 
     50%{
-        transform:translateY(50vh) translateX(10px) scale(1);
+        transform:translateY(50vh) translateX(10px);
     }
 
     100%{
-        transform:translateY(110vh) translateX(-10px) scale(0.8);
+        transform:translateY(110vh) translateX(-10px);
         opacity:0;
     }
 }
 
-@media(max-width:900px){
+/* RESPONSIVE */
+
+@media screen and (max-width:900px){
 
     body{
-        padding:15px;
-        align-items:flex-start;
+        overflow-y:auto;
+        padding:12px;
     }
 
     .card{
-        margin-top:20px;
-        padding:25px;
+        padding:20px 14px;
     }
 
     .memory-container{
         flex-direction:column;
-        gap:35px;
+        gap:18px;
     }
 
     .image-card{
-        width:100%;
-        max-width:320px;
+        width:220px;
         min-width:auto;
-        height:430px;
+        height:300px;
     }
 
     .quote-card{
         width:100%;
         min-height:auto;
-        text-align:center;
-        padding:28px;
+        padding:18px 14px;
     }
 
     .quote-text{
-        font-size:20px;
-        line-height:1.8;
+        font-size:16px;
+        line-height:1.6;
+        max-width:100%;
     }
 
     h2{
-        font-size:30px;
+        font-size:28px;
     }
 
     h3{
+        font-size:20px;
+    }
+}
+
+@media screen and (max-width:600px){
+
+    .card{
+        padding:16px 10px;
+        border-radius:20px;
+    }
+
+    .image-card{
+        width:190px;
+        height:255px;
+    }
+
+    .quote-card{
+        padding:16px 12px;
+        border-radius:18px;
+    }
+
+    .quote-text{
+        font-size:15px;
+        line-height:1.5;
+    }
+
+    h2{
         font-size:24px;
+    }
+
+    h3{
+        font-size:18px;
+    }
+
+    .next{
+        width:130px;
+        padding:10px 12px;
+        font-size:13px;
+    }
+
+    .welcome-quote{
+        padding:22px 16px;
+    }
+
+    .welcome-quote .quote-text{
+        font-size:16px;
+        line-height:1.5;
     }
 }
 
@@ -338,19 +444,23 @@ h3{
 
 <div class="card" id="card">
 
-    <h2>💖 Hey Chakli 💖</h2>
+    <div class="welcome-box">
 
-    <div class="quote-card" style="min-height:auto; text-align:center;">
+        <h2>💖 Hey Chakli 💖</h2>
 
-        <div class="quote-text">
-            I want to show you something special... ❤️
+        <div class="quote-card welcome-quote">
+
+            <div class="quote-text">
+                I want to show you something special ❤️
+            </div>
+
         </div>
 
-    </div>
+        <button class="next" onclick="nextStep()">
+            Start 💌
+        </button>
 
-    <button class="next" onclick="nextStep()">
-        Start 💌
-    </button>
+    </div>
 
 </div>
 
@@ -365,12 +475,10 @@ image:"./images/1.jpg",
 title:"Year 1 💖",
 text:
 `The day you entered my life,
-love stopped feeling like a dream
-and started feeling real.
+love stopped feeling like a dream and became real.
 
 Without even realizing it,
-my heart had already
-started calling you home.`
+my heart had already started calling you home.`
 },
 
 {
@@ -378,8 +486,7 @@ image:"./images/2.jpg",
 title:"Year 2 💖",
 text:
 `Between endless conversations,
-random laughs, silly fights,
-and long nights,
+random laughs, fights, and long nights,
 
 you slowly became the person
 I could never stay away from.`
@@ -389,12 +496,10 @@ I could never stay away from.`
 image:"./images/3.png",
 title:"Year 3 💖",
 text:
-`There were moments
-when misunderstandings
-created distance.
+`Misunderstandings created distance,
+and silence stayed longer than it should have.
 
-But somehow,
-our hearts still searched
+But our hearts still searched
 for each other every time.`
 },
 
@@ -402,23 +507,22 @@ for each other every time.`
 image:"./images/4.jpg",
 title:"Year 4 💖",
 text:
-`We learned that love
-is not about perfect days,
+`Love was never about perfect days,
+but about staying together during difficult moments.
 
-but about staying together
-during difficult moments.`
+No matter what happened,
+we kept holding each other tighter.`
 },
 
 {
 image:"./images/5.jpg",
 title:"Year 5 💖",
 text:
-`Your smile became my peace.
-Your presence became my comfort.
+`Your smile became my peace,
+and your presence became my comfort.
 
 Even during storms,
-we kept choosing
-each other again and again.`
+we kept choosing each other.`
 },
 
 {
@@ -426,11 +530,10 @@ image:"./images/6.jpg",
 title:"Year 6 💖",
 text:
 `We faced emotional nights,
-silent moments,
-pain, and fears.
+silent moments, pain, and fears.
 
 Yet somehow,
-our love survived everything.`
+our love survived everything together.`
 },
 
 {
@@ -438,8 +541,7 @@ image:"./images/7.jpg",
 title:"Year 7 💖",
 text:
 `Forever stopped sounding impossible
-because every future
-I imagined
+because every future I imagined
 
 always had you beside me,
 holding my hand.`
@@ -450,11 +552,10 @@ image:"./images/8.jpg",
 title:"Year 8 💖",
 text:
 `Eight years later,
-this love carries patience,
-healing, loyalty, and strength.
+this love carries patience, healing, and loyalty.
 
-We never stopped
-choosing each other.`
+We were never perfect,
+but we never stopped choosing each other.`
 }
 
 ];
@@ -510,19 +611,18 @@ ${memories[step].text}
 
             <div class="pass-box">
 
-                <div class="quote-text" style="text-align:center; font-size:22px;">
-                    Enter our Love Passcode 🔐
-                </div>
+                <div class="quote-text"
+                     style="font-size:18px;">
 
-                <br>
+                    Enter our Love Passcode 🔐
+
+                </div>
 
                 <input
                     type="password"
                     id="passcode"
                     placeholder="••••••"
                 >
-
-                <br>
 
                 <button
                     class="unlock-btn"
@@ -544,7 +644,7 @@ ${memories[step].text}
             <h2>💖 Forever Us 💖</h2>
 
             <div class="image-card"
-                 style="margin:auto; width:360px; height:500px;">
+                 style="margin:auto;">
 
                 <img
                     id="loveImage"
@@ -555,16 +655,14 @@ ${memories[step].text}
             </div>
 
             <div class="quote-card"
-                 style="margin-top:30px; min-height:auto;">
+                 style="margin-top:20px; min-height:auto;">
 
                 <div
                     id="revealText"
                     class="quote-text"
-                    style="text-align:center;"
                 ></div>
 
             </div>
-
         `;
 
         setTimeout(revealImage,1500);
@@ -620,8 +718,7 @@ function revealImage(){
     const text=
 
 `From strangers to soulmates,
-from late-night talks to silent understanding,
-from fights to healing,
+from late-night talks to healing,
 from holding hands to holding hearts,
 we grew through every season together.
 
@@ -647,7 +744,7 @@ my safest place is still beside you ❤️`;
     type();
 }
 
-/* SIDE EMOJIS */
+/* FALLING EMOJIS */
 
 const items=[
 "🌹","🌷","🌸",
@@ -666,25 +763,23 @@ setInterval(()=>{
         p.innerHTML=
             items[Math.floor(Math.random()*items.length)];
 
-        /* LEFT OR RIGHT */
-
         const side=Math.random() > 0.5;
 
         if(side){
 
             p.style.left=
-                (Math.random()*12)+"vw";
+                (Math.random()*10)+"vw";
 
         }else{
 
             p.style.right=
-                (Math.random()*12)+"vw";
+                (Math.random()*10)+"vw";
         }
 
         p.style.top="-10vh";
 
         p.style.fontSize=
-            (Math.random()*18+20)+"px";
+            (Math.random()*14+16)+"px";
 
         p.style.animationDuration=
             (Math.random()*4+5)+"s";
@@ -692,6 +787,7 @@ setInterval(()=>{
         document.body.appendChild(p);
 
         setTimeout(()=>p.remove(),9000);
+
     }
 
 },700);
