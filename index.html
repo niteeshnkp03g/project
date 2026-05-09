@@ -498,6 +498,30 @@
     <script>
       let step = -1;
 
+      const unlockDate = new Date("2026-05-14T00:00:00+05:30");
+
+      if (new Date() < unlockDate) {
+        document.getElementById("card").innerHTML = `
+
+        <div class="welcome-box">
+
+            <h2>💖 Coming Soon 💖</h2>
+
+            <div class="quote-card welcome-quote">
+
+                <div class="quote-text">
+                    This surprise will unlock after 14 May, 12:00 AM IST ❤️
+                </div>
+
+            </div>
+
+        </div>
+
+    `;
+
+        throw new Error("Content Locked");
+      }
+
       const memories = [
         {
           image: "./images/1.jpg",
